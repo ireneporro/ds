@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staffology design system v2.1</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.34.0/tabler-icons.min.css">
+<style>
+/* ============================================================
+   Staffology Design System — Tokens
+   Version: 2.0.0 (patch — layout primitives + rem + dark preview)
+   ------------------------------------------------------------
+   Light mode is the implemented default. A dark mode PREVIEW
+   is included at the bottom of this file (not yet wired into
+   components — see DARK MODE PREVIEW section).
+
+   Unit policy:
+   - Font sizes and spacing: rem (respect browser font scaling
+     for WCAG 2.2 AA accessibility).
+   - Border widths, radius, shadow offsets, touch targets: px
+     (these should NOT scale with text size).
+
+   1rem = 16px (default html font-size).
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+
+  /* =========================================================
+     BRAND
+     One color, one role. Cyan is the Staffology brand and is
+     used only for single-instance interactive moments per
+     viewport (primary CTA, active nav pill, focus ring, etc.).
+     ========================================================= */
+
+  --brand:          #03A9FC;
+  --brand-hover:    #0490D9;
+  --brand-active:   #0277B6;
+  --brand-100:      #E0F5FE;
+  --brand-50:       #F0FAFF;
+
+  /* =========================================================
+     PRIMARY (Navy)
+     Structure, hierarchy, mass-instance controls.
+     ========================================================= */
+
+  --primary-900:    #0A1533;
+  --primary-800:    #0C2647;
+  --primary-700:    #1E3655;
+  --primary-600:    #39495D;
+  --primary-500:    #445469;
+  --primary-200:    #C7CFD9;
+  --primary-100:    #E8ECF2;
+
+  /* =========================================================
+     NEUTRALS
+     ========================================================= */
+
+  --neutral-900:    #212529;
+  --neutral-800:    #343A40;
+  --neutral-700:    #495057;
+  --neutral-600:    #6C757D;
+  --neutral-500:    #ADB5BD;
+  --neutral-400:    #CED4DA;
+  --neutral-300:    #DEE2E6;
+  --neutral-200:    #E9ECEF;
+  --neutral-100:    #F8F9FA;
+  --neutral-50:     #FAFBFC;
+  --white:          #FFFFFF;
+  --black:          #000000;
+
+  /* =========================================================
+     SECONDARY BLUE
+     Reserved for data viz, illustrations.
+     ========================================================= */
+
+  --blue-500:       #4976F4;
+  --blue-100:       #EDF1FE;
+  --blue-800:       #1E336E;
+
+  /* =========================================================
+     STATUS SEMANTICS
+     ========================================================= */
+
+  --success-500:    #639922;   --success-100:   #EAF3DE;   --success-800:   #27500A;
+  --warning-500:    #BA7517;   --warning-100:   #FAEEDA;   --warning-800:   #633806;
+  --error-500:      #A32D2D;   --error-100:     #FCEBEB;   --error-800:     #791F1F;
+  --info-500:       #185FA5;   --info-100:      #E6F1FB;   --info-800:      #042C53;
+  --pending-500:    #4976F4;   --pending-100:   #EDF1FE;   --pending-800:   #1E336E;
+
+  /* =========================================================
+     AVATAR FALLBACK PALETTE
+     ========================================================= */
+
+  --av-blue-bg:     #E6F1FB;   --av-blue-fg:    #185FA5;
+  --av-amber-bg:    #FAEEDA;   --av-amber-fg:   #854F0B;
+  --av-purple-bg:   #EEEDFE;   --av-purple-fg:  #3C3489;
+  --av-coral-bg:    #FAECE7;   --av-coral-fg:   #712B13;
+  --av-teal-bg:     #E1F5EE;   --av-teal-fg:    #085041;
+  --av-pink-bg:     #FBEAF0;   --av-pink-fg:    #72243E;
+
+  /* =========================================================
+     TYPOGRAPHY
+     Inter for UI. JetBrains Mono for IDs, SSN, EIN, money,
+     and code references. No other typefaces in product.
+     ========================================================= */
+
+  --font-sans:      'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono:      'JetBrains Mono', ui-monospace, 'SF Mono', Monaco, monospace;
+
+  /* Sizes (rem-based) */
+  --fs-h1:          1.75rem;     /* 28px */
+  --fs-h2:          1.375rem;    /* 22px */
+  --fs-h3:          1.125rem;    /* 18px */
+  --fs-subtitle:    1rem;        /* 16px */
+  --fs-body:        0.875rem;    /* 14px — minimum body */
+  --fs-caption:     0.75rem;     /* 12px — metadata, captions */
+  --fs-micro:       0.6875rem;   /* 11px — only for uppercase column headers */
+
+  /* Weights */
+  --fw-regular:     400;
+  --fw-medium:      500;
+  --fw-semibold:    600;
+  --fw-bold:        700;
+
+  /* Line heights */
+  --lh-tight:       1.2;
+  --lh-normal:      1.5;
+  --lh-loose:       1.7;
+
+  /* Letter spacing */
+  --ls-tight:       -0.05em;
+  --ls-normal:      -0.0125em;
+  --ls-wide:        0.05em;
+
+  /* =========================================================
+     SPACING (rem-based)
+     4px base scale converted to rem so layouts scale with
+     the user's preferred font size.
+     ========================================================= */
+
+  --space-1:        0.25rem;     /* 4px  */
+  --space-2:        0.5rem;      /* 8px  */
+  --space-3:        0.75rem;     /* 12px */
+  --space-4:        1rem;        /* 16px */
+  --space-5:        1.25rem;     /* 20px */
+  --space-6:        1.5rem;      /* 24px */
+  --space-8:        2rem;        /* 32px */
+  --space-10:       2.5rem;      /* 40px */
+  --space-12:       3rem;        /* 48px */
+  --space-14:       3.5rem;      /* 56px */
+  --space-16:       4rem;        /* 64px */
+  --space-20:       5rem;        /* 80px */
+  --space-24:       6rem;        /* 96px */
+  --space-32:       8rem;        /* 128px */
+
+  /* Semantic spacing */
+  --space-card-padding:       var(--space-4);
+  --space-card-padding-lg:    var(--space-6);
+  --space-section:            var(--space-8);
+  --space-section-lg:         var(--space-12);
+  --space-form-gap:           var(--space-4);
+  --space-page-padding:       var(--space-6);
+
+  /* =========================================================
+     RADIUS (px — should NOT scale with text)
+     ========================================================= */
+
+  --radius-sm:      8px;
+  --radius-md:      12px;
+  --radius-lg:      16px;
+  --radius-pill:    999px;
+  --radius-full:    999px;
+
+  /* =========================================================
+     BORDERS (px — should NOT scale with text)
+     ========================================================= */
+
+  --border-thin:    1px;
+  --border-thick:   2px;
+
+  /* =========================================================
+     SHADOWS (px offsets — should NOT scale with text)
+     ========================================================= */
+
+  --shadow-strong:
+    0 0 1px rgba(33, 37, 41, 0.32),
+    0 4px 6px rgba(33, 37, 41, 0.20);
+
+  --shadow-mid-strong:
+    0 0 1px rgba(33, 37, 41, 0.08),
+    0 2px 2px rgba(33, 37, 41, 0.06);
+
+  --shadow-regular:
+    0 1px 8px rgba(0, 0, 0, 0.03);
+
+  --shadow-elevated:
+    0 4px 6px -2px rgba(10, 13, 18, 0.05),
+    0 12px 16px -4px rgba(10, 13, 18, 0.10);
+
+  --shadow-modal:
+    0 4px 24px rgba(0, 0, 0, 0.10);
+
+  /* =========================================================
+     DENSITY (rem so rows scale with text; min touch in px)
+     ========================================================= */
+
+  --row-data:                 2.5rem;          /* 40px — payroll, candidates */
+  --row-data-padding:         0.5rem 0.75rem;
+  --row-comfortable:          3.5rem;          /* 56px — listings, dashboards */
+  --row-comfortable-padding:  0.875rem 1.25rem;
+
+  /* =========================================================
+     MOTION (ms — not scalable)
+     ========================================================= */
+
+  --motion-fast:    150ms;
+  --motion-base:    250ms;
+  --motion-slow:    400ms;
+  --motion-ease:    cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* =========================================================
+     Z-INDEX
+     ========================================================= */
+
+  --z-base:         0;
+  --z-elevated:     10;
+  --z-sticky:       100;
+  --z-dropdown:     1000;
+  --z-modal:        2000;
+  --z-toast:        3000;
+  --z-tooltip:      4000;
+
+  /* =========================================================
+     DATA VISUALIZATION
+     Separate scale so chart / ring colors can diverge from
+     the interactive brand palette (useful when DS ships as
+     its own package and consumers override per-theme).
+     ========================================================= */
+
+  --viz-cyan:        var(--brand);
+  --viz-cyan-soft:   var(--brand-100);
+  --viz-blue:        var(--blue-500);
+  --viz-blue-soft:   var(--blue-100);
+  --viz-navy:        var(--primary-700);
+  --viz-navy-soft:   var(--primary-100);
+  --viz-track:       var(--neutral-200);
+
+  /* =========================================================
+     COMPONENT TOKENS
+     ========================================================= */
+
+  /* Focus ring (px so the visual indicator is consistent) */
+  --focus-ring:     0 0 0 3px var(--brand-100);
+  --focus-border:   var(--brand);
+
+  /* Button (rem so heights scale with text) */
+  --btn-height-sm:  2rem;          /* 32px */
+  --btn-height-md:  2.5rem;        /* 40px */
+  --btn-height-lg:  3rem;          /* 48px */
+
+  /* Input (rem so heights scale with text) */
+  --input-height-sm: 2.375rem;     /* 38px */
+  --input-height-md: 2.75rem;      /* 44px */
+  --input-height-lg: 2.875rem;     /* 46px */
+
+  /* Touch target minimum (px — WCAG 2.2 AA absolute floor) */
+  --touch-min:      44px;
+
+  /* =========================================================
+     LAYOUT — Container max-widths (rem)
+     Used by the Container layout primitive.
+     ========================================================= */
+
+  --container-sm:   40rem;         /* 640px */
+  --container-md:   48rem;         /* 768px */
+  --container-lg:   64rem;         /* 1024px */
+  --container-xl:   80rem;         /* 1280px */
+}
+
+/* ============================================================
+   GLOBAL BASE
+   ============================================================ */
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  letter-spacing: var(--ls-normal);
+  color: var(--neutral-900);
+  background: var(--neutral-100);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   DARK MODE PREVIEW (v2.1 draft)
+   ------------------------------------------------------------
+   STATUS: NOT WIRED INTO COMPONENTS. v2.0 components reference
+   raw tokens directly (e.g. var(--neutral-900)), so toggling
+   [data-theme="dark"] alone will NOT switch the UI yet.
+
+   To activate dark mode in v2.1, the following work is needed:
+     1. Introduce a semantic role-token layer
+        (e.g. --text-primary, --bg-page, --border-default).
+     2. Migrate component code to reference roles, not raw tokens.
+     3. Add a switching mechanism (data-theme attribute on <html>
+        or via styled-components ThemeProvider).
+     4. Run a full WCAG contrast audit on all pairs and adjust.
+
+   The values below are PRELIMINARY proposed mappings — designed
+   to demonstrate that the v2.0 palette extends coherently into
+   dark mode. They are NOT a complete dark theme.
+
+   Design rules applied:
+     - Backgrounds: tinted dark with navy undertone (not pure
+       black) to match the brand's structural color.
+     - Elevation: tonal (lighter shades for elevated surfaces),
+       not shadow-based (shadows don't read on dark).
+     - Brand cyan: brightened to maintain visual punch on dark.
+     - Navy primary: inverted to a light navy for mass-instance
+       controls.
+     - Status colors: shifted to lighter, less saturated tones
+       to reduce glare and maintain readability on dark.
+     - Text: off-white (not pure white) to reduce eye strain.
+   ============================================================ */
+
+[data-theme="dark"] {
+
+  /* Surfaces — tinted dark with navy undertone */
+  --bg-page:                  #0F1419;
+  --bg-card:                  #181E26;
+  --bg-elevated:              #1F262F;
+  --bg-subtle:                #141A21;
+
+  /* Text */
+  --text-primary:             #E8ECF2;
+  --text-secondary:           #9CA3AF;
+  --text-placeholder:         #6B7280;
+  --text-inverse:             #0F1419;
+
+  /* Borders */
+  --border-default:           #2E3640;
+  --border-strong:            #3D4651;
+  --divider:                  #252C36;
+
+  /* Brand cyan — brightened for dark backgrounds */
+  --brand:                    #38BCFD;
+  --brand-hover:              #5CC5FD;
+  --brand-active:             #75CFFE;
+  --brand-100:                #0A2A3D;
+
+  /* Primary navy — inverted for mass-instance controls on dark */
+  --primary-700:              #7B95B8;
+  --primary-900:              #E8ECF2;
+  --primary-100:              #2A3447;
+
+  /* Neutrals (selective overrides) */
+  --neutral-900:              #E8ECF2;
+  --neutral-700:              #C7CFD9;
+  --neutral-600:              #9CA3AF;
+  --neutral-500:              #6B7280;
+  --neutral-300:              #2E3640;
+  --neutral-200:              #252C36;
+  --neutral-100:              #0F1419;
+  --white:                    #181E26;
+
+  /* Status — lighter, less saturated for dark */
+  --success-500:  #87C44E;  --success-100:  #1D2D11;  --success-800:  #BBE186;
+  --warning-500:  #E0A86C;  --warning-100:  #2D200C;  --warning-800:  #F1C895;
+  --error-500:    #E27676;  --error-100:    #2D1414;  --error-800:    #F0A6A6;
+  --info-500:     #5CA0E0;  --info-100:     #0C1F33;  --info-800:     #94C0EA;
+  --pending-500:  #7B9CFB;  --pending-100:  #131C36;  --pending-800:  #ADC2FC;
+
+  /* Shadows — barely visible on dark; tonal elevation does the work */
+  --shadow-strong:
+    0 0 1px rgba(0, 0, 0, 0.5),
+    0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-regular:
+    0 1px 8px rgba(0, 0, 0, 0.3);
+  --shadow-elevated:
+    0 4px 6px -2px rgba(0, 0, 0, 0.3),
+    0 12px 16px -4px rgba(0, 0, 0, 0.5);
+  --shadow-modal:
+    0 4px 24px rgba(0, 0, 0, 0.5);
+
+  /* Focus ring — adjusted for dark */
+  --focus-ring:     0 0 0 3px rgba(56, 188, 253, 0.25);
+}
+
+/* ============================================================
+   END OF v2.0 TOKENS
+   ============================================================ */
+
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--neutral-100); color: var(--neutral-900); }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; }
+:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.skip-link { position: fixed; left: var(--space-4); top: var(--space-4); z-index: var(--z-tooltip); transform: translateY(-140%); background: var(--primary-800); color: var(--white); padding: var(--space-3) var(--space-4); border-radius: var(--radius-sm); text-decoration: none; }
+.skip-link:focus { transform: translateY(0); }
+.layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); min-height: 100vh; }
+.sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--white); border-right: 1px solid var(--neutral-200); padding: var(--space-5); z-index: var(--z-sticky); }
+.brand-lockup { display: flex; flex-direction: column; gap: var(--space-1); margin-bottom: var(--space-5); }
+.brand-lockup strong { color: var(--primary-800); font-size: var(--fs-subtitle); letter-spacing: var(--ls-tight); }
+.brand-lockup span { color: var(--neutral-600); font-size: var(--fs-caption); }
+.nav-search, .mobile-nav { width: 100%; min-height: var(--touch-min); border: 1px solid var(--neutral-300); border-radius: var(--radius-sm); padding: 0 var(--space-3); color: var(--neutral-900); background: var(--white); }
+.nav-list { list-style: none; padding: 0; margin: var(--space-5) 0 0; display: flex; flex-direction: column; gap: var(--space-1); }
+.nav-list a { display: flex; align-items: center; min-height: 36px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); text-decoration: none; color: var(--neutral-700); font-size: var(--fs-caption); font-weight: var(--fw-medium); }
+.nav-list a:hover { background: var(--neutral-100); color: var(--primary-800); }
+.nav-list a.active { background: var(--primary-800); color: var(--white); }
+.mobile-bar { display: none; position: sticky; top: 0; z-index: var(--z-sticky); background: var(--white); border-bottom: 1px solid var(--neutral-200); padding: var(--space-3) var(--space-4); }
+main { width: min(1200px, 100%); padding: var(--space-8) var(--space-6); }
+.section { scroll-margin-top: var(--space-6); background: var(--white); box-shadow: var(--shadow-strong); border-radius: var(--radius-lg); padding: var(--space-card-padding-lg); margin-bottom: var(--space-section); }
+.cover { min-height: 420px; display: flex; flex-direction: column; justify-content: center; gap: var(--space-4); }
+.eyebrow { color: var(--neutral-600); font-size: var(--fs-caption); font-weight: var(--fw-semibold); }
+h1, h2, h3, h4 { color: var(--primary-800); letter-spacing: var(--ls-tight); margin-top: 0; }
+h1 { font-size: 3rem; line-height: var(--lh-tight); margin-bottom: 0; }
+h2 { font-size: var(--fs-h2); margin-bottom: var(--space-5); }
+h3 { font-size: var(--fs-h3); margin-bottom: var(--space-2); }
+h4 { font-size: var(--fs-subtitle); margin-bottom: var(--space-2); }
+p { margin-top: 0; }
+.caption, figcaption { font-size: var(--fs-caption); color: var(--neutral-700); }
+.badge, .status-pill { display: inline-flex; align-items: center; gap: var(--space-2); border-radius: var(--radius-pill); font-size: var(--fs-caption); font-weight: var(--fw-semibold); padding: var(--space-1) var(--space-3); min-height: 24px; }
+.version { background: var(--brand-100); color: var(--brand-active); width: fit-content; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+.stack { display: flex; flex-direction: column; gap: var(--space-4); }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.example { border: 1px solid var(--neutral-200); background: var(--neutral-50); border-radius: var(--radius-md); padding: var(--space-4); }
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-3); margin: 0 0 var(--space-5); }
+.rule { border: 1px solid var(--neutral-200); background: var(--neutral-50); border-radius: var(--radius-md); padding: var(--space-4); }
+.rule strong { display: block; color: var(--primary-800); font-size: var(--fs-caption); margin-bottom: var(--space-1); }
+.rule p { margin: 0; color: var(--neutral-700); font-size: var(--fs-caption); }
+.token-group { border-top: 1px solid var(--neutral-200); padding-top: var(--space-5); margin-top: var(--space-5); }
+.group-head { display: flex; justify-content: space-between; gap: var(--space-4); align-items: baseline; margin-bottom: var(--space-3); }
+.group-head p { color: var(--neutral-700); font-size: var(--fs-caption); max-width: 520px; margin: 0; }
+.swatch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-3); }
+.swatch { text-align: left; border: 1px solid var(--neutral-200); background: var(--white); border-radius: var(--radius-sm); padding: var(--space-2); min-height: var(--touch-min); cursor: pointer; transition: transform var(--motion-fast) var(--motion-ease), box-shadow var(--motion-fast) var(--motion-ease); }
+.swatch:hover { transform: translateY(-2px); box-shadow: var(--shadow-mid-strong); }
+.swatch-color { display: block; height: 52px; border: 1px solid var(--neutral-200); border-radius: var(--radius-sm); margin-bottom: var(--space-2); }
+.swatch-name, .mono { font-family: var(--font-mono); }
+.swatch-name { display: block; color: var(--primary-800); font-size: var(--fs-caption); font-weight: var(--fw-medium); }
+.swatch-value { display: block; color: var(--neutral-600); font-size: var(--fs-caption); overflow-wrap: anywhere; }
+.type-sample { display: grid; grid-template-columns: 150px 1fr 1fr; gap: var(--space-4); align-items: baseline; padding: var(--space-3) 0; border-bottom: 1px solid var(--neutral-200); }
+.type-token { color: var(--neutral-600); font-family: var(--font-mono); font-size: var(--fs-caption); }
+.ruler { display: grid; grid-template-columns: 130px 1fr 90px; gap: var(--space-3); align-items: center; margin-bottom: var(--space-2); }
+.ruler-bar { height: 24px; min-width: 2px; border-radius: var(--radius-sm); background: var(--primary-800); }
+.radius-demo, .shadow-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: var(--space-4); }
+.radius-box { width: 84px; height: 84px; background: var(--brand-100); border: 1px solid var(--brand); }
+.shadow-card { background: var(--white); border-radius: var(--radius-md); padding: var(--space-5); min-height: 96px; border: 1px solid var(--neutral-200); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-width: var(--touch-min); border: 1px solid transparent; border-radius: var(--radius-sm); font-weight: var(--fw-semibold); cursor: pointer; transition: all var(--motion-fast) var(--motion-ease); text-decoration: none; }
+.btn-sm { height: var(--btn-height-sm); padding: 0 var(--space-3); font-size: var(--fs-caption); }
+.btn-md { height: var(--btn-height-md); padding: 0 var(--space-4); font-size: var(--fs-body); }
+.btn-lg { height: var(--btn-height-lg); padding: 0 var(--space-5); font-size: var(--fs-subtitle); }
+.btn-primary { background: var(--brand); color: var(--white); }
+.btn-primary:hover { background: var(--brand-hover); }
+.btn-secondary { background: var(--white); color: var(--primary-800); border-color: var(--neutral-300); }
+.btn-secondary:hover, .btn-ghost:hover { background: var(--neutral-100); }
+.btn-ghost, .btn-link { background: transparent; color: var(--primary-800); }
+.btn-danger { background: var(--error-500); color: var(--white); }
+.btn-danger:hover { background: var(--error-800); }
+.btn-link { padding-inline: 0; min-width: auto; color: var(--brand-active); }
+.btn-icon { width: var(--btn-height-md); padding: 0; background: var(--white); color: var(--primary-800); border-color: var(--neutral-300); }
+.btn[disabled], .input[disabled], select[disabled] { cursor: not-allowed; opacity: .58; }
+.spinner { width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 800ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.field { display: grid; gap: var(--space-2); min-width: 220px; }
+.field label { color: var(--primary-800); font-weight: var(--fw-semibold); font-size: var(--fs-caption); }
+.input, .select { height: var(--input-height-md); border: 1px solid var(--neutral-300); border-radius: var(--radius-sm); background: var(--white); color: var(--neutral-900); padding: 0 var(--space-3); min-width: 220px; }
+.input:hover { border-color: var(--neutral-400); }
+.input.focused, .input:focus, .select.focused { border-color: var(--focus-border); box-shadow: var(--focus-ring); }
+.input.error { border-color: var(--error-500); }
+.helper { color: var(--neutral-600); font-size: var(--fs-caption); }
+.helper.error { color: var(--error-800); }
+.read-only { border-color: transparent; background: transparent; padding-inline: 0; }
+.card { background: var(--white); border-radius: var(--radius-lg); padding: var(--space-card-padding); box-shadow: var(--shadow-regular); border: 1px solid var(--neutral-200); }
+.card.elevated { box-shadow: var(--shadow-strong); }
+.tone-success { background: var(--success-100); color: var(--success-800); } .tone-success .dot { background: var(--success-500); }
+.tone-warning { background: var(--warning-100); color: var(--warning-800); } .tone-warning .dot { background: var(--warning-500); }
+.tone-error { background: var(--error-100); color: var(--error-800); } .tone-error .dot { background: var(--error-500); }
+.tone-info { background: var(--info-100); color: var(--info-800); } .tone-info .dot { background: var(--info-500); }
+.tone-pending { background: var(--pending-100); color: var(--pending-800); } .tone-pending .dot { background: var(--pending-500); }
+.tone-neutral { background: var(--neutral-200); color: var(--neutral-800); } .tone-neutral .dot { background: var(--neutral-600); }
+.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: var(--fs-caption); font-weight: var(--fw-bold); }
+.avatar-xs { width: 24px; height: 24px; } .avatar-sm { width: 32px; height: 32px; } .avatar-lg { width: 48px; height: 48px; } .avatar-xl { width: 64px; height: 64px; font-size: var(--fs-subtitle); }
+.av-blue { background: var(--av-blue-bg); color: var(--av-blue-fg); } .av-amber { background: var(--av-amber-bg); color: var(--av-amber-fg); } .av-purple { background: var(--av-purple-bg); color: var(--av-purple-fg); } .av-coral { background: var(--av-coral-bg); color: var(--av-coral-fg); } .av-teal { background: var(--av-teal-bg); color: var(--av-teal-fg); } .av-pink { background: var(--av-pink-bg); color: var(--av-pink-fg); } .av-navy { background: var(--primary-700); color: var(--white); }
+.icon-demo i { display: inline-flex; color: var(--primary-800); }
+.layout-primitive { min-height: 46px; border: 1px dashed var(--primary-200); background: var(--white); border-radius: var(--radius-sm); display: grid; place-items: center; color: var(--neutral-700); font-size: var(--fs-caption); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-size: var(--fs-micro); font-weight: var(--fw-semibold); color: var(--neutral-600); letter-spacing: var(--ls-wide); padding: var(--space-3); border-bottom: 1px solid var(--neutral-300); }
+td { padding: var(--space-3); border-bottom: 1px solid var(--neutral-200); color: var(--neutral-700); }
+tbody tr:hover { background: var(--neutral-100); }
+.dense thead th { background: var(--neutral-100); }
+.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--primary-800); }
+.modal-stage { min-height: 280px; border-radius: var(--radius-md); background: rgba(10,21,51,.35); display: grid; place-items: center; padding: var(--space-5); }
+.modal { width: min(520px, 100%); background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-modal); padding: var(--space-5); }
+.tabs { display: inline-flex; gap: var(--space-1); border-radius: var(--radius-pill); background: var(--neutral-100); padding: var(--space-1); }
+.tab { min-height: var(--touch-min); border: 0; background: transparent; color: var(--neutral-700); border-radius: var(--radius-pill); padding: 0 var(--space-4); cursor: pointer; }
+.tab.active { background: var(--brand); color: var(--white); }
+.tabs.underline { background: transparent; border-bottom: 1px solid var(--neutral-200); border-radius: 0; padding: 0; }
+.tabs.underline .tab { border-radius: 0; min-height: 40px; }
+.tabs.underline .tab.active { color: var(--brand-active); background: transparent; border-bottom: 2px solid var(--brand); }
+.combo-menu, .dropdown-menu, .calendar { background: var(--white); border: 1px solid var(--neutral-200); border-radius: var(--radius-md); box-shadow: var(--shadow-elevated); padding: var(--space-2); }
+.combo-item, .dropdown-item { min-height: 36px; display: flex; align-items: center; gap: var(--space-2); padding: 0 var(--space-3); border-radius: var(--radius-sm); color: var(--neutral-700); }
+.combo-item.active, .dropdown-item:hover { background: var(--neutral-100); color: var(--primary-800); }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 32px); gap: var(--space-1); text-align: center; }
+.calendar-grid span { min-height: 32px; display: grid; place-items: center; border-radius: var(--radius-sm); font-size: var(--fs-caption); }
+.calendar-grid .picked { background: var(--brand); color: var(--white); }
+.toast { display: flex; align-items: flex-start; gap: var(--space-3); border-radius: var(--radius-md); padding: var(--space-3); box-shadow: var(--shadow-elevated); background: var(--white); border-left: 4px solid currentColor; }
+.tooltip { display: inline-flex; background: var(--primary-900); color: var(--white); padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); box-shadow: var(--shadow-elevated); font-size: var(--fs-caption); }
+.pagination { display: flex; gap: var(--space-2); align-items: center; justify-content: flex-end; }
+.page-btn { min-width: var(--touch-min); height: var(--touch-min); border: 1px solid var(--neutral-300); background: var(--white); border-radius: var(--radius-sm); color: var(--primary-800); }
+.page-btn.active { background: var(--brand); border-color: var(--brand); color: var(--white); }
+.skeleton { position: relative; overflow: hidden; background: var(--neutral-200); border-radius: var(--radius-sm); }
+.skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); animation: shimmer 1.4s infinite; }
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+.breadcrumb { display: flex; gap: var(--space-2); align-items: center; color: var(--neutral-600); }
+.breadcrumb strong { color: var(--primary-800); }
+.service-card { overflow: hidden; padding: 0; }
+.service-banner { background: var(--brand); color: var(--white); padding: var(--space-4); }
+.service-banner .mono { background: rgba(255,255,255,.18); padding: var(--space-1) var(--space-2); border-radius: var(--radius-pill); }
+.service-body { padding: var(--space-4); }
+.donut-card { display: flex; align-items: center; gap: var(--space-4); }
+.donut { width: 88px; height: 88px; position: relative; }
+.donut.sm { width: 64px; height: 64px; } .donut.lg { width: 140px; height: 140px; }
+.donut svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.donut-center { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; font-family: var(--font-mono); font-weight: var(--fw-bold); color: var(--primary-800); }
+.stat-card.selected { background: var(--brand); color: var(--white); }
+.stat-card.selected h4, .stat-card.selected .num, .stat-card.selected .caption { color: var(--white); }
+.stepper { display: flex; align-items: center; gap: 0; min-width: 260px; }
+.step { border-radius: 50%; display: grid; place-items: center; flex: 0 0 auto; }
+.step-sm { width: 24px; height: 24px; } .step-md { width: 34px; height: 34px; } .step-lg { width: 44px; height: 44px; }
+.done, .current { background: var(--brand); color: var(--white); }
+.current { box-shadow: 0 0 0 4px var(--brand-100); }
+.todo { background: var(--white); color: var(--neutral-500); border: 1px solid var(--neutral-300); }
+.step-line { flex: 1; height: 2px; background: var(--neutral-200); }
+.step-line.filled { background: var(--brand); }
+.chip { min-height: 36px; border-radius: var(--radius-pill); border: 1px solid var(--neutral-300); background: var(--white); color: var(--neutral-800); padding: 0 var(--space-4); display: inline-flex; align-items: center; gap: var(--space-2); font-weight: var(--fw-semibold); cursor: pointer; }
+.chip.active { background: var(--primary-800); color: var(--white); border-color: var(--primary-800); }
+.bar { width: 100%; height: 10px; background: var(--viz-track); border-radius: var(--radius-pill); overflow: hidden; }
+.bar.sm { height: 6px; } .bar.lg { height: 14px; }
+.bar span { display: block; height: 100%; border-radius: inherit; }
+.audience-option, .check-row { display: flex; align-items: center; gap: var(--space-3); min-height: var(--touch-min); padding: var(--space-3); border: 1px solid var(--neutral-200); border-radius: var(--radius-sm); background: var(--white); }
+input[type="checkbox"] { accent-color: var(--primary-800); width: 18px; height: 18px; }
+.announcement { border: 1px solid var(--neutral-200); border-radius: var(--radius-md); padding: var(--space-4); background: var(--white); }
+.chart { width: 100%; min-height: 210px; }
+.empty-cell { color: var(--neutral-500); font-family: var(--font-mono); }
+.copy-toast { position: fixed; right: var(--space-5); bottom: var(--space-5); z-index: var(--z-toast); transform: translateY(120px); transition: transform var(--motion-base) var(--motion-ease); background: var(--primary-800); color: var(--white); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); box-shadow: var(--shadow-elevated); }
+.copy-toast.show { transform: translateY(0); }
+@media (max-width: 900px) {
+  .layout { display: block; }
+  .sidebar { display: none; }
+  .mobile-bar { display: block; }
+  main { padding: var(--space-4); }
+  h1 { font-size: 2.25rem; }
+  .grid-2, .grid-3, .type-sample { grid-template-columns: 1fr; }
+  .group-head { display: block; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="mobile-bar">
+  <select class="mobile-nav" aria-label="Jump to section">
+    <option value="#cover">Cover</option><option value="#foundations-color-tokens">Color tokens</option><option value="#foundations-typography">Typography</option><option value="#foundations-spacing-scale">Spacing scale</option><option value="#foundations-radius">Radius</option><option value="#foundations-shadows">Shadows</option><option value="#foundations-motion">Motion</option><option value="#components-primitives">Components — primitives</option><option value="#components-base">Components — base</option><option value="#components-patterns">Components — patterns</option><option value="#patterns">Patterns</option><option value="#tables-dense-vs-default">Tables — dense vs default</option><option value="#footer">Footer</option>
+  </select>
+</div>
+<div class="layout">
+  <aside class="sidebar" aria-label="Design system navigation">
+    <div class="brand-lockup"><strong>Staffology DS</strong><span>Living reference v2.1</span></div>
+    <input class="nav-search" type="search" placeholder="Search sections" aria-label="Search sections">
+    <nav>
+      <ul class="nav-list">
+        <li><a href="#cover">Cover</a></li><li><a href="#foundations-color-tokens">Color tokens</a></li><li><a href="#foundations-typography">Typography</a></li><li><a href="#foundations-spacing-scale">Spacing scale</a></li><li><a href="#foundations-radius">Radius</a></li><li><a href="#foundations-shadows">Shadows</a></li><li><a href="#foundations-motion">Motion</a></li><li><a href="#components-primitives">Components — primitives</a></li><li><a href="#components-base">Components — base</a></li><li><a href="#components-patterns">Components — patterns</a></li><li><a href="#patterns">Patterns</a></li><li><a href="#tables-dense-vs-default">Tables — dense vs default</a></li><li><a href="#footer">Footer</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <main id="main">
+    <section id="cover" class="section cover" data-title="Cover">
+      <span class="badge version">v2.1</span>
+      <h1>Staffology design system</h1>
+      <p class="eyebrow">A live, navigable visual reference for components, tokens, and product UI decisions.</p>
+      <div class="rules">
+        <div class="rule"><strong>Source of truth</strong><p>This page is generated from the supplied token CSS and catalog docs. It should be used as the lightweight static reference, not a code playground.</p></div>
+        <div class="rule"><strong>Decision lens</strong><p>Use this reference to validate hierarchy, density, status meaning, table treatment, and component fit before designing new screens.</p></div>
+      </div>
+      <p class="caption">Last updated: May 29, 2026</p>
+    </section>
+
+    <section id="foundations-color-tokens" class="section" data-title="Color tokens">
+      <h2>Color tokens</h2>
+      <p class="caption">Every color comes from <span class="mono">colors_and_type.css</span>. Click any swatch to copy its token name.</p>
+      <div class="rules">
+        <div class="rule"><strong>Cyan is scarce</strong><p>Use brand cyan for a single focal interaction per viewport: primary CTA, active nav pill, or focus treatment.</p></div>
+        <div class="rule"><strong>Navy is structural</strong><p>Use primary navy for hierarchy and mass-instance controls such as active filter chips, checkboxes, and toggles.</p></div>
+        <div class="rule"><strong>Status is semantic</strong><p>Success, warning, error, info, pending, and neutral have fixed meanings. Do not repurpose them for decoration.</p></div>
+        <div class="rule"><strong>Charts stay blue</strong><p>Data visualization uses the viz scale only. Do not use red, orange, green, or amber for chart series.</p></div>
+      </div>
+      
+  <div class="token-group">
+    <div class="group-head">
+      <h3>Brand</h3>
+      <p>Cyan is reserved for one single-instance focal action per viewport.</p>
+    </div>
+    <div class="swatch-grid">
+      
+      <button class="swatch" data-copy="--brand" type="button">
+        <span class="swatch-color" style="background: var(--brand)"></span>
+        <span class="swatch-name">--brand</span>
+        <span class="swatch-value">#38BCFD</span>
+      </button>
+      <button class="swatch" data-copy="--brand-hover" type="button">
+        <span class="swatch-color" style="background: var(--brand-hover)"></span>
+        <span class="swatch-name">--brand-hover</span>
+        <span class="swatch-value">#5CC5FD</span>
+      </button>
+      <button class="swatch" data-copy="--brand-active" type="button">
+        <span class="swatch-color" style="background: var(--brand-active)"></span>
+        <span class="swatch-name">--brand-active</span>
+        <span class="swatch-value">#75CFFE</span>
+      </button>
+      <button class="swatch" data-copy="--brand-100" type="button">
+        <span class="swatch-color" style="background: var(--brand-100)"></span>
+        <span class="swatch-name">--brand-100</span>
+        <span class="swatch-value">#0A2A3D</span>
+      </button>
+      <button class="swatch" data-copy="--brand-50" type="button">
+        <span class="swatch-color" style="background: var(--brand-50)"></span>
+        <span class="swatch-name">--brand-50</span>
+        <span class="swatch-value">#F0FAFF</span>
+      </button>
+    </div>
+  </div>
+  <div class="token-group">
+    <div class="group-head">
+      <h3>Primary (navy)</h3>
+      <p>Navy handles hierarchy, structure, and mass-instance controls.</p>
+    </div>
+    <div class="swatch-grid">
+      
+      <button class="swatch" data-copy="--primary-900" type="button">
+        <span class="swatch-color" style="background: var(--primary-900)"></span>
+        <span class="swatch-name">--primary-900</span>
+        <span class="swatch-value">#E8ECF2</span>
+      </button>
+      <button class="swatch" data-copy="--primary-800" type="button">
+        <span class="swatch-color" style="background: var(--primary-800)"></span>
+        <span class="swatch-name">--primary-800</span>
+        <span class="swatch-value">#0C2647</span>
+      </button>
+      <button class="swatch" data-copy="--primary-700" type="button">
+        <span class="swatch-color" style="background: var(--primary-700)"></span>
+        <span class="swatch-name">--primary-700</span>
+        <span class="swatch-value">#7B95B8</span>
+      </button>
+      <button class="swatch" data-copy="--primary-600" type="button">
+        <span class="swatch-color" style="background: var(--primary-600)"></span>
+        <span class="swatch-name">--primary-600</span>
+        <span class="swatch-value">#39495D</span>
+      </button>
+      <button class="swatch" data-copy="--primary-500" type="button">
+        <span class="swatch-color" style="background: var(--primary-500)"></span>
+        <span class="swatch-name">--primary-500</span>
+        <span class="swatch-value">#445469</span>
+      </button>
+      <button class="swatch" data-copy="--primary-200" type="button">
+        <span class="swatch-color" style="background: var(--primary-200)"></span>
+        <span class="swatch-name">--primary-200</span>
+        <span class="swatch-value">#C7CFD9</span>
+      </button>
+      <button class="swatch" data-copy="--primary-100" type="button">
+        <span class="swatch-color" style="background: var(--primary-100)"></span>
+        <span class="swatch-name">--primary-100</span>
+        <span class="swatch-value">#2A3447</span>
+      </button>
+    </div>
+  </div>
+  <div class="token-group">
+    <div class="group-head">
+      <h3>Neutrals</h3>
+      <p>Neutrals carry text, surfaces, borders, dividers, disabled states, and page backgrounds.</p>
+    </div>
+    <div class="swatch-grid">
+      
+      <button class="swatch" data-copy="--neutral-900" type="button">
+        <span class="swatch-color" style="background: var(--neutral-900)"></span>
+        <span class="swatch-name">--neutral-900</span>
+        <span class="swatch-value">#E8ECF2</span>
+      </button>
+      <button class="swatch" data-copy="--neutral-800" type="button">
+        <span class="swatch-color" style="background: var(--neutral-800)"></span>
+        <span class="swatch-name">--neutral-800</span>
+        <span class="swatch-value">#343A40</span>
+      </button>
+      <button class="swatch" data-copy="--neutral-700" type="button">
+        <span class="swatch-color" style="background: var(--neutral-700)"></span>
+        <span class="swatch-name">--neutral-700</span>
+        <span class="swatch-value">#C7CFD9</span>
+      </button>
+      <button class="swatch" data-copy="--neutral-600" type="button">
+        <span class="swatch-color" style="background: var(--neutral-600)"></span>
+        <span class="swatch-name">--neutral-600</span>
+        <span class="swatch-value">#9CA3AF</span>
+      </button>
+      <button class="swatch" data-copy="--neutral-500" type="button">
+        <span class="swatch-color" style="background: var(--neutral-500)"></span>
+        <span class="swatch-name">--neutral-500</span>
+        <span class="swatch-value">#6B7280</span>
+      </button>
+      <button class="swatch" data-copy="--neutral-400" type="button">
+        <span class="swatch-color" style="background: var(--neutral-400)"></span>
+        <span class="swatch-name">--neutral-400</span>
+        <span class="swatch-value">#CED4DA</span>
+      </button>
+      <button class="swatch" data-copy="--neutral-300" type="button">
+        <span class="swatch-color" style="background: var(--neutral-300)"></span>
+        <span class="swatch-name">--neutral-300</span>
+        <span class="swatch-value">#2E3640</span>
+      </button>
+      <button class="swatch" data-copy="--neutral-200" type="button">
+        <span class="swatch-color" style="background: var(--neutral-200)"></span>
+        <span class="swatch-name">--neutral-200</span>
+        <span class="swatch-value">#252C36</span>
+      </button>
+      <button class="swatch" data-copy="--neutral-100" type="button">
+        <span class="swatch-color" style="background: var(--neutral-100)"></span>
+        <span class="swatch-name">--neutral-100</span>
+        <span class="swatch-value">#0F1419</span>
+      </button>
+      <button class="swatch" data-copy="--neutral-50" type="button">
+        <span class="swatch-color" style="background: var(--neutral-50)"></span>
+        <span class="swatch-name">--neutral-50</span>
+        <span class="swatch-value">#FAFBFC</span>
+      </button>
+      <button class="swatch" data-copy="--white" type="button">
+        <span class="swatch-color" style="background: var(--white)"></span>
+        <span class="swatch-name">--white</span>
+        <span class="swatch-value">#181E26</span>
+      </button>
+      <button class="swatch" data-copy="--black" type="button">
+        <span class="swatch-color" style="background: var(--black)"></span>
+        <span class="swatch-name">--black</span>
+        <span class="swatch-value">#000000</span>
+      </button>
+    </div>
+  </div>
+  <div class="token-group">
+    <div class="group-head">
+      <h3>Secondary blue</h3>
+      <p>Secondary blue is reserved for data visualization, illustrations, and the deterministic blue avatar.</p>
+    </div>
+    <div class="swatch-grid">
+      <button class="swatch" data-copy="--blue-500" type="button">
+        <span class="swatch-color" style="background: var(--blue-500)"></span>
+        <span class="swatch-name">--blue-500</span>
+        <span class="swatch-value">#4976F4</span>
+      </button>
+      <button class="swatch" data-copy="--blue-100" type="button">
+        <span class="swatch-color" style="background: var(--blue-100)"></span>
+        <span class="swatch-name">--blue-100</span>
+        <span class="swatch-value">#EDF1FE</span>
+      </button>
+      <button class="swatch" data-copy="--blue-800" type="button">
+        <span class="swatch-color" style="background: var(--blue-800)"></span>
+        <span class="swatch-name">--blue-800</span>
+        <span class="swatch-value">#1E336E</span>
+      </button>
+    </div>
+  </div>
+  <div class="token-group">
+    <div class="group-head">
+      <h3>Status semantics</h3>
+      <p>Status tones have fixed meanings and are separate from data visualization.</p>
+    </div>
+    <div class="swatch-grid">
+      
+      <button class="swatch" data-copy="--success-500" type="button">
+        <span class="swatch-color" style="background: var(--success-500)"></span>
+        <span class="swatch-name">--success-500</span>
+        <span class="swatch-value">#87C44E</span>
+      </button>
+      <button class="swatch" data-copy="--success-100" type="button">
+        <span class="swatch-color" style="background: var(--success-100)"></span>
+        <span class="swatch-name">--success-100</span>
+        <span class="swatch-value">#1D2D11</span>
+      </button>
+      <button class="swatch" data-copy="--success-800" type="button">
+        <span class="swatch-color" style="background: var(--success-800)"></span>
+        <span class="swatch-name">--success-800</span>
+        <span class="swatch-value">#BBE186</span>
+      </button>
+      <button class="swatch" data-copy="--warning-500" type="button">
+        <span class="swatch-color" style="background: var(--warning-500)"></span>
+        <span class="swatch-name">--warning-500</span>
+        <span class="swatch-value">#E0A86C</span>
+      </button>
+      <button class="swatch" data-copy="--warning-100" type="button">
+        <span class="swatch-color" style="background: var(--warning-100)"></span>
+        <span class="swatch-name">--warning-100</span>
+        <span class="swatch-value">#2D200C</span>
+      </button>
+      <button class="swatch" data-copy="--warning-800" type="button">
+        <span class="swatch-color" style="background: var(--warning-800)"></span>
+        <span class="swatch-name">--warning-800</span>
+        <span class="swatch-value">#F1C895</span>
+      </button>
+      <button class="swatch" data-copy="--error-500" type="button">
+        <span class="swatch-color" style="background: var(--error-500)"></span>
+        <span class="swatch-name">--error-500</span>
+        <span class="swatch-value">#E27676</span>
+      </button>
+      <button class="swatch" data-copy="--error-100" type="button">
+        <span class="swatch-color" style="background: var(--error-100)"></span>
+        <span class="swatch-name">--error-100</span>
+        <span class="swatch-value">#2D1414</span>
+      </button>
+      <button class="swatch" data-copy="--error-800" type="button">
+        <span class="swatch-color" style="background: var(--error-800)"></span>
+        <span class="swatch-name">--error-800</span>
+        <span class="swatch-value">#F0A6A6</span>
+      </button>
+      <button class="swatch" data-copy="--info-500" type="button">
+        <span class="swatch-color" style="background: var(--info-500)"></span>
+        <span class="swatch-name">--info-500</span>
+        <span class="swatch-value">#5CA0E0</span>
+      </button>
+      <button class="swatch" data-copy="--info-100" type="button">
+        <span class="swatch-color" style="background: var(--info-100)"></span>
+        <span class="swatch-name">--info-100</span>
+        <span class="swatch-value">#0C1F33</span>
+      </button>
+      <button class="swatch" data-copy="--info-800" type="button">
+        <span class="swatch-color" style="background: var(--info-800)"></span>
+        <span class="swatch-name">--info-800</span>
+        <span class="swatch-value">#94C0EA</span>
+      </button>
+      <button class="swatch" data-copy="--pending-500" type="button">
+        <span class="swatch-color" style="background: var(--pending-500)"></span>
+        <span class="swatch-name">--pending-500</span>
+        <span class="swatch-value">#7B9CFB</span>
+      </button>
+      <button class="swatch" data-copy="--pending-100" type="button">
+        <span class="swatch-color" style="background: var(--pending-100)"></span>
+        <span class="swatch-name">--pending-100</span>
+        <span class="swatch-value">#131C36</span>
+      </button>
+      <button class="swatch" data-copy="--pending-800" type="button">
+        <span class="swatch-color" style="background: var(--pending-800)"></span>
+        <span class="swatch-name">--pending-800</span>
+        <span class="swatch-value">#ADC2FC</span>
+      </button>
+    </div>
+  </div>
+  <div class="token-group">
+    <div class="group-head">
+      <h3>Data viz</h3>
+      <p>Charts use the blue-only visualization scale. No red, orange, green, or amber series.</p>
+    </div>
+    <div class="swatch-grid">
+      
+      <button class="swatch" data-copy="--viz-cyan" type="button">
+        <span class="swatch-color" style="background: var(--viz-cyan)"></span>
+        <span class="swatch-name">--viz-cyan</span>
+        <span class="swatch-value">var(--brand)</span>
+      </button>
+      <button class="swatch" data-copy="--viz-cyan-soft" type="button">
+        <span class="swatch-color" style="background: var(--viz-cyan-soft)"></span>
+        <span class="swatch-name">--viz-cyan-soft</span>
+        <span class="swatch-value">var(--brand-100)</span>
+      </button>
+      <button class="swatch" data-copy="--viz-blue" type="button">
+        <span class="swatch-color" style="background: var(--viz-blue)"></span>
+        <span class="swatch-name">--viz-blue</span>
+        <span class="swatch-value">var(--blue-500)</span>
+      </button>
+      <button class="swatch" data-copy="--viz-blue-soft" type="button">
+        <span class="swatch-color" style="background: var(--viz-blue-soft)"></span>
+        <span class="swatch-name">--viz-blue-soft</span>
+        <span class="swatch-value">var(--blue-100)</span>
+      </button>
+      <button class="swatch" data-copy="--viz-navy" type="button">
+        <span class="swatch-color" style="background: var(--viz-navy)"></span>
+        <span class="swatch-name">--viz-navy</span>
+        <span class="swatch-value">var(--primary-700)</span>
+      </button>
+      <button class="swatch" data-copy="--viz-navy-soft" type="button">
+        <span class="swatch-color" style="background: var(--viz-navy-soft)"></span>
+        <span class="swatch-name">--viz-navy-soft</span>
+        <span class="swatch-value">var(--primary-100)</span>
+      </button>
+      <button class="swatch" data-copy="--viz-track" type="button">
+        <span class="swatch-color" style="background: var(--viz-track)"></span>
+        <span class="swatch-name">--viz-track</span>
+        <span class="swatch-value">var(--neutral-200)</span>
+      </button>
+    </div>
+  </div>
+  <div class="token-group">
+    <div class="group-head">
+      <h3>Avatar palette</h3>
+      <p>Six fallback pairs are deterministic; navy is reserved for the logged-in user.</p>
+    </div>
+    <div class="swatch-grid">
+      
+      <button class="swatch" data-copy="--av-blue-bg" type="button">
+        <span class="swatch-color" style="background: var(--av-blue-bg)"></span>
+        <span class="swatch-name">--av-blue-bg</span>
+        <span class="swatch-value">#E6F1FB</span>
+      </button>
+      <button class="swatch" data-copy="--av-blue-fg" type="button">
+        <span class="swatch-color" style="background: var(--av-blue-fg)"></span>
+        <span class="swatch-name">--av-blue-fg</span>
+        <span class="swatch-value">#185FA5</span>
+      </button>
+      <button class="swatch" data-copy="--av-amber-bg" type="button">
+        <span class="swatch-color" style="background: var(--av-amber-bg)"></span>
+        <span class="swatch-name">--av-amber-bg</span>
+        <span class="swatch-value">#FAEEDA</span>
+      </button>
+      <button class="swatch" data-copy="--av-amber-fg" type="button">
+        <span class="swatch-color" style="background: var(--av-amber-fg)"></span>
+        <span class="swatch-name">--av-amber-fg</span>
+        <span class="swatch-value">#854F0B</span>
+      </button>
+      <button class="swatch" data-copy="--av-purple-bg" type="button">
+        <span class="swatch-color" style="background: var(--av-purple-bg)"></span>
+        <span class="swatch-name">--av-purple-bg</span>
+        <span class="swatch-value">#EEEDFE</span>
+      </button>
+      <button class="swatch" data-copy="--av-purple-fg" type="button">
+        <span class="swatch-color" style="background: var(--av-purple-fg)"></span>
+        <span class="swatch-name">--av-purple-fg</span>
+        <span class="swatch-value">#3C3489</span>
+      </button>
+      <button class="swatch" data-copy="--av-coral-bg" type="button">
+        <span class="swatch-color" style="background: var(--av-coral-bg)"></span>
+        <span class="swatch-name">--av-coral-bg</span>
+        <span class="swatch-value">#FAECE7</span>
+      </button>
+      <button class="swatch" data-copy="--av-coral-fg" type="button">
+        <span class="swatch-color" style="background: var(--av-coral-fg)"></span>
+        <span class="swatch-name">--av-coral-fg</span>
+        <span class="swatch-value">#712B13</span>
+      </button>
+      <button class="swatch" data-copy="--av-teal-bg" type="button">
+        <span class="swatch-color" style="background: var(--av-teal-bg)"></span>
+        <span class="swatch-name">--av-teal-bg</span>
+        <span class="swatch-value">#E1F5EE</span>
+      </button>
+      <button class="swatch" data-copy="--av-teal-fg" type="button">
+        <span class="swatch-color" style="background: var(--av-teal-fg)"></span>
+        <span class="swatch-name">--av-teal-fg</span>
+        <span class="swatch-value">#085041</span>
+      </button>
+      <button class="swatch" data-copy="--av-pink-bg" type="button">
+        <span class="swatch-color" style="background: var(--av-pink-bg)"></span>
+        <span class="swatch-name">--av-pink-bg</span>
+        <span class="swatch-value">#FBEAF0</span>
+      </button>
+      <button class="swatch" data-copy="--av-pink-fg" type="button">
+        <span class="swatch-color" style="background: var(--av-pink-fg)"></span>
+        <span class="swatch-name">--av-pink-fg</span>
+        <span class="swatch-value">#72243E</span>
+      </button>
+      <button class="swatch" data-copy="--primary-700" type="button">
+        <span class="swatch-color" style="background: var(--primary-700)"></span>
+        <span class="swatch-name">--primary-700</span>
+        <span class="swatch-value">#7B95B8</span>
+      </button>
+      <button class="swatch" data-copy="--white" type="button">
+        <span class="swatch-color" style="background: var(--white)"></span>
+        <span class="swatch-name">--white</span>
+        <span class="swatch-value">#181E26</span>
+      </button>
+    </div>
+  </div>
+    </section>
+
+    <section id="foundations-typography" class="section" data-title="Typography">
+      <h2>Typography</h2>
+      <div class="rules">
+        <div class="rule"><strong>Inter for UI</strong><p>All product UI uses Inter through <span class="mono">--font-sans</span>. Do not introduce a third typeface.</p></div>
+        <div class="rule"><strong>Mono for data</strong><p>Use JetBrains Mono for IDs, money, code references, and aligned numeric values.</p></div>
+        <div class="rule"><strong>Sentence case</strong><p>Use sentence case for body, buttons, and modals. Reserve uppercase treatment for table column headers.</p></div>
+        <div class="rule"><strong>Micro is narrow</strong><p><span class="mono">--fs-micro</span> is only for table column headers, paired with <span class="mono">--ls-wide</span>.</p></div>
+      </div>
+      <div class="example" style="margin-bottom: var(--space-5)">
+        <h3>Typeface and letter spacing</h3>
+        <p class="caption" style="margin-bottom: var(--space-2)">Product UI uses Inter through <span class="mono">--font-sans</span>. Headings use <span class="mono">--ls-tight</span>, which is <span class="mono">-0.05em</span>; at a 16px base size that equals <span class="mono">-0.8px</span>.</p>
+        <p style="font-family: var(--font-sans); letter-spacing: var(--ls-tight); font-size: var(--fs-h2); color: var(--primary-800); margin: 0">Inter with tight letter spacing</p>
+      </div>
+      <div class="type-sample">
+        <span class="type-token">--fs-h1</span>
+        <span style="font-size: var(--fs-h1); font-family: var(--font-sans);">Inter sample for product UI</span>
+        <span style="font-size: var(--fs-h1); font-family: var(--font-mono);">SO-48291 · $24,800.00</span>
+      </div>
+      <div class="type-sample">
+        <span class="type-token">--fs-h2</span>
+        <span style="font-size: var(--fs-h2); font-family: var(--font-sans);">Inter sample for product UI</span>
+        <span style="font-size: var(--fs-h2); font-family: var(--font-mono);">SO-48291 · $24,800.00</span>
+      </div>
+      <div class="type-sample">
+        <span class="type-token">--fs-h3</span>
+        <span style="font-size: var(--fs-h3); font-family: var(--font-sans);">Inter sample for product UI</span>
+        <span style="font-size: var(--fs-h3); font-family: var(--font-mono);">SO-48291 · $24,800.00</span>
+      </div>
+      <div class="type-sample">
+        <span class="type-token">--fs-subtitle</span>
+        <span style="font-size: var(--fs-subtitle); font-family: var(--font-sans);">Inter sample for product UI</span>
+        <span style="font-size: var(--fs-subtitle); font-family: var(--font-mono);">SO-48291 · $24,800.00</span>
+      </div>
+      <div class="type-sample">
+        <span class="type-token">--fs-body</span>
+        <span style="font-size: var(--fs-body); font-family: var(--font-sans);">Inter sample for product UI</span>
+        <span style="font-size: var(--fs-body); font-family: var(--font-mono);">SO-48291 · $24,800.00</span>
+      </div>
+      <div class="type-sample">
+        <span class="type-token">--fs-caption</span>
+        <span style="font-size: var(--fs-caption); font-family: var(--font-sans);">Inter sample for product UI</span>
+        <span style="font-size: var(--fs-caption); font-family: var(--font-mono);">SO-48291 · $24,800.00</span>
+      </div>
+      <div class="type-sample">
+        <span class="type-token">--fs-micro</span>
+        <span style="font-size: var(--fs-micro); font-family: var(--font-sans);">Inter sample for product UI</span>
+        <span style="font-size: var(--fs-micro); font-family: var(--font-mono);">SO-48291 · $24,800.00</span>
+      </div>
+      <div class="grid-3" style="margin-top: var(--space-5)">
+        <div class="example"><span class="type-token">Order ID</span><p class="mono" style="font-size: var(--fs-body); margin: var(--space-2) 0 0">SO-2026-48291</p></div>
+        <div class="example"><span class="type-token">Money</span><p class="mono" style="font-size: var(--fs-h3); margin: var(--space-2) 0 0">$84,120.50</p></div>
+        <div class="example"><span class="type-token">Column header</span><p style="font-size: var(--fs-micro); font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide); margin: var(--space-2) 0 0">TOTAL HOURS</p></div>
+      </div>
+    </section>
+
+    <section id="foundations-spacing-scale" class="section" data-title="Spacing scale">
+      <h2>Spacing scale</h2>
+      <div class="rules">
+        <div class="rule"><strong>Token-only spacing</strong><p>Use the spacing scale and semantic aliases instead of one-off pixel values.</p></div>
+        <div class="rule"><strong>Rem-based layout</strong><p>Spacing scales with the user's browser font preference, which supports accessibility.</p></div>
+        <div class="rule"><strong>Default section rhythm</strong><p>Use <span class="mono">--space-section</span> for stacked sections and <span class="mono">--space-card-padding-lg</span> for roomy section cards.</p></div>
+      </div>
+      <div class="ruler"><span class="mono">--space-1</span><span class="ruler-bar" style="width: var(--space-1)"></span><span class="caption">4px · 0.25rem</span></div><div class="ruler"><span class="mono">--space-2</span><span class="ruler-bar" style="width: var(--space-2)"></span><span class="caption">8px · 0.5rem</span></div><div class="ruler"><span class="mono">--space-3</span><span class="ruler-bar" style="width: var(--space-3)"></span><span class="caption">12px · 0.75rem</span></div><div class="ruler"><span class="mono">--space-4</span><span class="ruler-bar" style="width: var(--space-4)"></span><span class="caption">16px · 1rem</span></div><div class="ruler"><span class="mono">--space-5</span><span class="ruler-bar" style="width: var(--space-5)"></span><span class="caption">20px · 1.25rem</span></div><div class="ruler"><span class="mono">--space-6</span><span class="ruler-bar" style="width: var(--space-6)"></span><span class="caption">24px · 1.5rem</span></div><div class="ruler"><span class="mono">--space-8</span><span class="ruler-bar" style="width: var(--space-8)"></span><span class="caption">32px · 2rem</span></div><div class="ruler"><span class="mono">--space-10</span><span class="ruler-bar" style="width: var(--space-10)"></span><span class="caption">40px · 2.5rem</span></div><div class="ruler"><span class="mono">--space-12</span><span class="ruler-bar" style="width: var(--space-12)"></span><span class="caption">48px · 3rem</span></div><div class="ruler"><span class="mono">--space-14</span><span class="ruler-bar" style="width: var(--space-14)"></span><span class="caption">56px · 3.5rem</span></div><div class="ruler"><span class="mono">--space-16</span><span class="ruler-bar" style="width: var(--space-16)"></span><span class="caption">64px · 4rem</span></div><div class="ruler"><span class="mono">--space-20</span><span class="ruler-bar" style="width: var(--space-20)"></span><span class="caption">80px · 5rem</span></div><div class="ruler"><span class="mono">--space-24</span><span class="ruler-bar" style="width: var(--space-24)"></span><span class="caption">96px · 6rem</span></div><div class="ruler"><span class="mono">--space-32</span><span class="ruler-bar" style="width: var(--space-32)"></span><span class="caption">128px · 8rem</span></div>
+    </section>
+
+    <section id="foundations-radius" class="section" data-title="Radius">
+      <h2>Radius</h2>
+      <div class="rules">
+        <div class="rule"><strong>Px-based radius</strong><p>Radius values do not scale with text. They keep the product shape language stable.</p></div>
+        <div class="rule"><strong>Use by surface</strong><p>Small controls use <span class="mono">--radius-sm</span>, cards and modals use <span class="mono">--radius-lg</span>, pills use <span class="mono">--radius-pill</span>.</p></div>
+      </div>
+      <div class="radius-demo"><div class="example"><div class="radius-box" style="border-radius: var(--radius-sm)"></div><p class="caption mono" style="margin-top: var(--space-3)">--radius-sm</p></div><div class="example"><div class="radius-box" style="border-radius: var(--radius-md)"></div><p class="caption mono" style="margin-top: var(--space-3)">--radius-md</p></div><div class="example"><div class="radius-box" style="border-radius: var(--radius-lg)"></div><p class="caption mono" style="margin-top: var(--space-3)">--radius-lg</p></div><div class="example"><div class="radius-box" style="border-radius: var(--radius-pill)"></div><p class="caption mono" style="margin-top: var(--space-3)">--radius-pill</p></div></div>
+    </section>
+
+    <section id="foundations-shadows" class="section" data-title="Shadows">
+      <h2>Shadows</h2>
+      <div class="rules">
+        <div class="rule"><strong>Elevation has meaning</strong><p>Use stronger shadows for sticky elements, KPI cards, service order cards, dropdowns, and modals.</p></div>
+        <div class="rule"><strong>No nested card shadows</strong><p>Cards inside cards should use borders, not a second shadow stack.</p></div>
+        <div class="rule"><strong>Clickable lift is reserved</strong><p>Hover lift belongs only to cards that are themselves clickable.</p></div>
+      </div>
+      <div class="shadow-demo"><div class="shadow-card" style="box-shadow: var(--shadow-regular)"><span class="mono caption">--shadow-regular</span></div><div class="shadow-card" style="box-shadow: var(--shadow-mid-strong)"><span class="mono caption">--shadow-mid-strong</span></div><div class="shadow-card" style="box-shadow: var(--shadow-strong)"><span class="mono caption">--shadow-strong</span></div><div class="shadow-card" style="box-shadow: var(--shadow-elevated)"><span class="mono caption">--shadow-elevated</span></div><div class="shadow-card" style="box-shadow: var(--shadow-modal)"><span class="mono caption">--shadow-modal</span></div></div>
+    </section>
+
+    <section id="foundations-motion" class="section" data-title="Motion">
+      <h2>Motion</h2>
+      <div class="rules">
+        <div class="rule"><strong>Subtle by default</strong><p>Use motion for hover, focus, state changes, and slide-in panels. Avoid decorative animation.</p></div>
+        <div class="rule"><strong>Reduced motion is respected</strong><p>The global CSS disables long animation and smooth scrolling when the user prefers reduced motion.</p></div>
+        <div class="rule"><strong>No behavior inflation</strong><p>This page keeps motion static except for required interactions such as tabs, search, and copy feedback.</p></div>
+      </div>
+      <div class="grid-2"><div class="example"><span class="mono">--motion-fast</span><p class="caption" style="margin: var(--space-2) 0 0">150ms</p></div><div class="example"><span class="mono">--motion-base</span><p class="caption" style="margin: var(--space-2) 0 0">250ms</p></div><div class="example"><span class="mono">--motion-slow</span><p class="caption" style="margin: var(--space-2) 0 0">400ms</p></div><div class="example"><span class="mono">--motion-ease</span><p class="caption" style="margin: var(--space-2) 0 0">cubic-bezier(0.4, 0, 0.2, 1)</p></div></div>
+      <div class="token-group">
+        <div class="group-head">
+          <h3>Borders</h3>
+          <p>Border widths stay in px so outlines remain visually consistent.</p>
+        </div>
+        <div class="grid-2">
+          <div class="example"><span class="mono">--border-thin</span><p class="caption" style="margin: var(--space-2) 0 0">1px</p></div>
+          <div class="example"><span class="mono">--border-thick</span><p class="caption" style="margin: var(--space-2) 0 0">2px</p></div>
+        </div>
+      </div>
+      <div class="token-group">
+        <div class="group-head">
+          <h3>Density and touch target</h3>
+          <p>Rows scale with text preference; minimum touch target stays absolute.</p>
+        </div>
+        <div class="grid-3">
+          <div class="example"><span class="mono">--row-data</span><p class="caption" style="margin: var(--space-2) 0 0">2.5rem (40px)</p></div>
+          <div class="example"><span class="mono">--row-comfortable</span><p class="caption" style="margin: var(--space-2) 0 0">3.5rem (56px)</p></div>
+          <div class="example"><span class="mono">--touch-min</span><p class="caption" style="margin: var(--space-2) 0 0">44px</p></div>
+        </div>
+      </div>
+      <div class="token-group">
+        <div class="group-head">
+          <h3>Z-index</h3>
+          <p>Layering tokens keep sticky UI, dropdowns, modals, toasts, and tooltips predictable.</p>
+        </div>
+        <div class="grid-3">
+          <div class="example"><span class="mono">--z-base</span><p class="caption" style="margin: var(--space-2) 0 0">0</p></div>
+          <div class="example"><span class="mono">--z-sticky</span><p class="caption" style="margin: var(--space-2) 0 0">100</p></div>
+          <div class="example"><span class="mono">--z-dropdown</span><p class="caption" style="margin: var(--space-2) 0 0">1000</p></div>
+          <div class="example"><span class="mono">--z-modal</span><p class="caption" style="margin: var(--space-2) 0 0">2000</p></div>
+          <div class="example"><span class="mono">--z-toast</span><p class="caption" style="margin: var(--space-2) 0 0">3000</p></div>
+          <div class="example"><span class="mono">--z-tooltip</span><p class="caption" style="margin: var(--space-2) 0 0">4000</p></div>
+        </div>
+      </div>
+      <div class="token-group">
+        <div class="group-head">
+          <h3>Component tokens</h3>
+          <p>Focus, button, input, and container tokens are shown in the relevant component examples.</p>
+        </div>
+        <div class="grid-3">
+          <div class="example"><span class="mono">--focus-ring</span><p class="caption" style="margin: var(--space-2) 0 0">visible on keyboard focus</p></div>
+          <div class="example"><span class="mono">--btn-height-sm / md / lg</span><p class="caption" style="margin: var(--space-2) 0 0">32px · 40px · 48px</p></div>
+          <div class="example"><span class="mono">--input-height-sm / md / lg</span><p class="caption" style="margin: var(--space-2) 0 0">38px · 44px · 46px</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="components-primitives" class="section" data-title="Components — primitives">
+      <h2>Components — primitives</h2>
+      <div class="rules">
+        <div class="rule"><strong>Buttons</strong><p>One primary button per viewport. Use danger only for destructive actions and always label icon buttons accessibly.</p></div>
+        <div class="rule"><strong>Inputs</strong><p>Labels sit above fields. Placeholder text is hint text, never the only label. Error replaces helper text in the same slot.</p></div>
+        <div class="rule"><strong>Badges vs status</strong><p>Badges have no dot and are for tags or counts. Business status always uses StatusPill.</p></div>
+        <div class="rule"><strong>Avatars and icons</strong><p>Navy avatar means the logged-in user. Icons inherit color and use Tabler classes, not embedded SVG.</p></div>
+        <div class="rule"><strong>Layout primitives</strong><p>Stack, Grid, and Container enforce token-based gaps and product width constraints.</p></div>
+      </div>
+      <div class="stack">
+        <div class="example"><h3>Button</h3><div class="row" style="margin-bottom: var(--space-2)"><button class="btn btn-primary btn-sm" ><i class="ti ti-check"></i>Save changes</button><button class="btn btn-primary btn-md" ><i class="ti ti-check"></i>Save changes</button><button class="btn btn-primary btn-lg" ><i class="ti ti-check"></i>Save changes</button></div><div class="row" style="margin-bottom: var(--space-2)"><button class="btn btn-secondary btn-sm" ><i class="ti ti-arrow-left"></i>Cancel</button><button class="btn btn-secondary btn-md" ><i class="ti ti-arrow-left"></i>Cancel</button><button class="btn btn-secondary btn-lg" ><i class="ti ti-arrow-left"></i>Cancel</button></div><div class="row" style="margin-bottom: var(--space-2)"><button class="btn btn-ghost btn-sm" ><i class="ti ti-eye"></i>Preview</button><button class="btn btn-ghost btn-md" ><i class="ti ti-eye"></i>Preview</button><button class="btn btn-ghost btn-lg" ><i class="ti ti-eye"></i>Preview</button></div><div class="row" style="margin-bottom: var(--space-2)"><button class="btn btn-danger btn-sm" ><i class="ti ti-trash"></i>Delete</button><button class="btn btn-danger btn-md" ><i class="ti ti-trash"></i>Delete</button><button class="btn btn-danger btn-lg" ><i class="ti ti-trash"></i>Delete</button></div><div class="row" style="margin-bottom: var(--space-2)"><button class="btn btn-link btn-sm" ><i class="ti ti-arrow-right"></i>View order</button><button class="btn btn-link btn-md" ><i class="ti ti-arrow-right"></i>View order</button><button class="btn btn-link btn-lg" ><i class="ti ti-arrow-right"></i>View order</button></div><div class="row" style="margin-bottom: var(--space-2)"><button class="btn btn-icon btn-sm" aria-label="Edit"><i class="ti ti-edit"></i></button><button class="btn btn-icon btn-md" aria-label="Edit"><i class="ti ti-edit"></i></button><button class="btn btn-icon btn-lg" aria-label="Edit"><i class="ti ti-edit"></i></button></div><div class="row"><button class="btn btn-primary btn-md" disabled>Disabled</button><button class="btn btn-primary btn-md"><span class="spinner"></span>Loading</button></div></div>
+        <div class="example"><h3>Input</h3><div class="row" style="align-items:flex-start"><div class="field"><label>Default</label><input class="input   " value=""   aria-label="Default input"><span class="helper ">Helper text lives below the field.</span></div><div class="field"><label>Hover</label><input class="input   " value=""   aria-label="Hover input"><span class="helper ">Helper text lives below the field.</span></div><div class="field"><label>Focus</label><input class="input focused  " value=""   aria-label="Focus input"><span class="helper ">Helper text lives below the field.</span></div><div class="field"><label>Filled</label><input class="input   " value="payroll@staffology.com"   aria-label="Filled input"><span class="helper ">Helper text lives below the field.</span></div><div class="field"><label>Disabled</label><input class="input   " value="" disabled  aria-label="Disabled input"><span class="helper ">Helper text lives below the field.</span></div><div class="field"><label>Read-only</label><input class="input   read-only" value="SO-2026-48291"  readonly aria-label="Read-only input"><span class="helper ">Helper text lives below the field.</span></div><div class="field"><label>Error</label><input class="input  error " value="invalid@"   aria-label="Error input"><span class="helper error">Enter a valid email address.</span></div></div></div>
+        <div class="grid-2"><div class="card"><h3>Card default</h3><p class="caption">White surface, subtle shadow, token padding.</p></div><div class="card elevated"><h3>Card elevated</h3><p class="caption">Stronger shadow for dashboard widgets.</p></div></div>
+        <div class="example"><h3>Badge</h3><div class="row"><span class="badge tone-success">success</span><span class="badge tone-warning">warning</span><span class="badge tone-error">error</span><span class="badge tone-info">info</span><span class="badge tone-pending">pending</span><span class="badge tone-neutral">neutral</span></div></div>
+        <div class="example"><h3>Avatar</h3><div class="row"><span class="avatar av-navy">YO</span><span class="avatar av-blue">MH</span><span class="avatar av-amber">DR</span><span class="avatar av-purple">LP</span><span class="avatar av-coral">RC</span><span class="avatar av-teal">AJ</span><span class="avatar av-pink">JN</span></div></div>
+        <div class="example icon-demo"><h3>Icon</h3><div class="row"><span><i class="ti ti-settings" style="font-size:12px"></i> <span class="caption">xs</span></span><span><i class="ti ti-settings" style="font-size:14px"></i> <span class="caption">sm</span></span><span><i class="ti ti-settings" style="font-size:16px"></i> <span class="caption">md</span></span><span><i class="ti ti-settings" style="font-size:20px"></i> <span class="caption">lg</span></span><span><i class="ti ti-settings" style="font-size:24px"></i> <span class="caption">xl</span></span></div></div>
+        <div class="grid-3"><div class="example"><h3>Stack</h3><div class="stack"><span class="layout-primitive">Item</span><span class="layout-primitive">Item</span><span class="layout-primitive">Item</span></div></div><div class="example"><h3>Grid</h3><div class="grid-3"><span class="layout-primitive">1</span><span class="layout-primitive">2</span><span class="layout-primitive">3</span></div></div><div class="example"><h3>Container</h3><div class="layout-primitive" style="max-width: var(--container-sm); margin:auto">640px</div></div></div>
+      </div>
+    </section>
+
+    <section id="components-base" class="section" data-title="Components — base">
+      <h2>Components — base</h2>
+      <div class="rules">
+        <div class="rule"><strong>Table default</strong><p>Default table headers are divider-only. Use this for standard listings such as orders, candidates, and payroll.</p></div>
+        <div class="rule"><strong>Dense exception</strong><p>Use dense neutral headers only for comparison tables, 6+ columns, horizontal scroll, or stacked similar tables.</p></div>
+        <div class="rule"><strong>Modal restraint</strong><p>Modals are for deliberate, blocking moments such as destructive confirmations. Do not stack modals.</p></div>
+        <div class="rule"><strong>Tabs</strong><p>Pill tabs are page-level navigation. Underline tabs are lower-weight sub-tabs inside an existing context.</p></div>
+        <div class="rule"><strong>Select vs combobox</strong><p>Select is for small finite lists. Combobox is for long lists, search, async lists, or multi-select flows.</p></div>
+        <div class="rule"><strong>Feedback components</strong><p>Use toast for non-blocking system feedback, tooltip only to supplement labels, and skeleton when the final shape is known.</p></div>
+      </div>
+      <div class="stack">
+        <div class="grid-2"><figure class="example table-wrap"><figcaption>Default table: divider-only header for standard listings.</figcaption><table class=""><thead><tr><th>Branch</th><th>Status</th><th class="num">Active orders</th><th class="num">Hours</th></tr></thead><tbody><tr><td>Carson</td><td><span class="status-pill tone-success"><span class="dot"></span>Active</span></td><td class="num">248</td><td class="num">12,840</td></tr><tr><td>Chino</td><td><span class="status-pill tone-info"><span class="dot"></span>Reviewing</span></td><td class="num">139</td><td class="num">8,420</td></tr><tr><td>Phoenix</td><td><span class="status-pill tone-warning"><span class="dot"></span>Pending</span></td><td class="num">42</td><td class="num">1,820</td></tr></tbody></table></figure><figure class="example table-wrap"><figcaption>Dense table: neutral header for comparison tables with 6+ columns.</figcaption><table class="dense"><thead><tr><th>Branch</th><th>Status</th><th class="num">Active orders</th><th class="num">Hours</th></tr></thead><tbody><tr><td>Carson</td><td><span class="status-pill tone-success"><span class="dot"></span>Active</span></td><td class="num">248</td><td class="num">12,840</td></tr><tr><td>Chino</td><td><span class="status-pill tone-info"><span class="dot"></span>Reviewing</span></td><td class="num">139</td><td class="num">8,420</td></tr><tr><td>Phoenix</td><td><span class="status-pill tone-warning"><span class="dot"></span>Pending</span></td><td class="num">42</td><td class="num">1,820</td></tr></tbody></table></figure></div>
+        <div class="example"><h3>Modal</h3><div class="modal-stage"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="row" style="justify-content:space-between"><h4 id="modal-title">Archive order</h4><button class="btn btn-icon" aria-label="Close"><i class="ti ti-x"></i></button></div><p class="caption">This static render shows the dialog and backdrop treatment.</p><div class="row" style="justify-content:flex-end"><button class="btn btn-secondary btn-md">Cancel</button><button class="btn btn-danger btn-md">Archive</button></div></div></div></div>
+        <div class="grid-2"><div class="example"><h3>Tabs pill</h3><div class="tabs" data-tabs><button class="tab active">Overview</button><button class="tab">Orders</button><button class="tab">Invoices</button></div></div><div class="example"><h3>Tabs underline</h3><div class="tabs underline" data-tabs><button class="tab active">Profile</button><button class="tab">Skills</button><button class="tab">Interview</button></div></div></div>
+        <div class="grid-3"><div class="field"><label>Select default</label><select class="select"><option>Active orders</option></select></div><div class="field"><label>Select focused</label><select class="select focused"><option>Pending orders</option></select></div><div class="field"><label>Select disabled</label><select class="select" disabled><option>Archived</option></select></div></div>
+        <div class="grid-2"><div class="example"><h3>Combobox closed</h3><input class="input" value="Coca-Cola Staffing" aria-label="Combobox closed"></div><div class="example"><h3>Combobox open</h3><input class="input focused" value="co" aria-label="Combobox open"><div class="combo-menu"><div class="combo-item active">Coca-Cola Staffing</div><div class="combo-item">Coastal Logistics</div><div class="combo-item">Core Payroll Group</div></div></div></div>
+        <div class="example"><h3>DatePicker</h3><div class="grid-2"><div class="field"><label>Start date</label><input class="input" value="May 29, 2026"></div><div class="calendar"><div class="calendar-grid"><span class="">M</span><span class="">T</span><span class="">W</span><span class="">T</span><span class="">F</span><span class="">S</span><span class="">S</span><span class="">25</span><span class="">26</span><span class="">27</span><span class="">28</span><span class="picked">29</span><span class="">30</span><span class="">31</span></div></div></div></div>
+        <div class="grid-2"><div class="toast tone-success"><i class="ti ti-info-circle"></i><div><strong>success toast</strong><p class="caption" style="margin:0">System feedback appears non-blocking.</p></div></div><div class="toast tone-warning"><i class="ti ti-info-circle"></i><div><strong>warning toast</strong><p class="caption" style="margin:0">System feedback appears non-blocking.</p></div></div><div class="toast tone-error"><i class="ti ti-info-circle"></i><div><strong>error toast</strong><p class="caption" style="margin:0">System feedback appears non-blocking.</p></div></div><div class="toast tone-info"><i class="ti ti-info-circle"></i><div><strong>info toast</strong><p class="caption" style="margin:0">System feedback appears non-blocking.</p></div></div></div>
+        <div class="example"><h3>Tooltip</h3><span class="tooltip">Payroll totals update nightly</span></div>
+        <div class="grid-2"><div class="example"><h3>Dropdown</h3><button class="btn btn-secondary btn-md">Actions <i class="ti ti-chevron-down"></i></button><div class="dropdown-menu" style="margin-top: var(--space-2)"><div class="dropdown-item"><i class="ti ti-edit"></i>Edit</div><div class="dropdown-item"><i class="ti ti-copy"></i>Duplicate</div><div class="dropdown-item" style="color:var(--error-800)"><i class="ti ti-trash"></i>Delete</div></div></div><div class="example"><h3>Pagination</h3><div class="pagination"><span class="caption">Showing 1-25 of 142</span><button class="page-btn" disabled><i class="ti ti-chevron-left"></i></button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn"><i class="ti ti-chevron-right"></i></button></div></div></div>
+        <div class="example"><h3>Skeleton</h3><div class="row"><span class="skeleton" style="width:180px;height:14px"></span><span class="skeleton" style="width:44px;height:44px;border-radius:50%"></span><span class="skeleton" style="width:240px;height:96px"></span></div></div>
+        <div class="example"><h3>Breadcrumb</h3><div class="breadcrumb"><span>Home</span><i class="ti ti-chevron-right"></i><span>Orders</span><i class="ti ti-chevron-right"></i><strong>SO-2026-48291</strong></div></div>
+      </div>
+    </section>
+
+    <section id="components-patterns" class="section" data-title="Components — patterns">
+      <h2>Components — patterns</h2>
+      <div class="rules">
+        <div class="rule"><strong>Service orders</strong><p>Use ServiceOrderCard whenever the UI represents an active or completed service order. Flat mode is for dashboard summaries.</p></div>
+        <div class="rule"><strong>Progress and share</strong><p>Use DonutCard for fraction-first reads and ProportionBar for lightweight inline percentage comparison.</p></div>
+        <div class="rule"><strong>Status consistency</strong><p>StatusPill is the single status visualization. Use preset business codes and preserve the six tone meanings.</p></div>
+        <div class="rule"><strong>Mass filters</strong><p>Chip and FilterChip active states are navy, not brand cyan, because they appear in repeated sets.</p></div>
+        <div class="rule"><strong>Audience targeting</strong><p>AudienceSelector owns the flat and exclusive selection rules. MultiSelectList owns search, all-toggle, and summary behavior.</p></div>
+        <div class="rule"><strong>ChartCard</strong><p>Use viz tokens only. Line and bar examples show two-series and comparison cases without status colors.</p></div>
+      </div>
+      <div class="stack">
+        <div class="grid-2"><div class="card service-card"><div class="service-banner"><span class="mono">SO-2026-48291</span><h3 style="color:var(--white);margin-top:var(--space-3)">Forklift operators</h3><p>May 29 · Shift 1 · Carson</p></div><div class="service-body"><span class="status-pill tone-success"><span class="dot"></span>Active</span><p class="caption" style="margin-top:var(--space-3)">Pipeline and primary action live in the white body.</p></div></div><div class="card"><h3>ServiceOrderCard flat</h3><p class="mono">SO-2026-48292</p><p>Warehouse associates · Phoenix</p><span class="status-pill tone-warning"><span class="dot"></span>Filling order</span></div></div>
+        <div class="grid-3"><div class="card donut-card"><div class="donut sm"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--viz-track)" stroke-width="9"/><circle cx="50" cy="50" r="40" fill="none" stroke="var(--viz-cyan)" stroke-width="9" stroke-linecap="round" stroke-dasharray="160 251"/></svg><div class="donut-center">3/12</div></div><div><h4>DonutCard sm</h4><p class="caption">Filled ratio with stats</p></div></div><div class="card donut-card"><div class="donut md"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--viz-track)" stroke-width="9"/><circle cx="50" cy="50" r="40" fill="none" stroke="var(--viz-cyan)" stroke-width="9" stroke-linecap="round" stroke-dasharray="160 251"/></svg><div class="donut-center">8/12</div></div><div><h4>DonutCard md</h4><p class="caption">Filled ratio with stats</p></div></div><div class="card donut-card"><div class="donut lg"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--viz-track)" stroke-width="9"/><circle cx="50" cy="50" r="40" fill="none" stroke="var(--viz-cyan)" stroke-width="9" stroke-linecap="round" stroke-dasharray="160 251"/></svg><div class="donut-center">—</div></div><div><h4>DonutCard lg</h4><p class="caption">Needs distribution fallback</p></div></div></div>
+        <div class="grid-2"><div class="card stat-card"><p class="num" style="font-size:var(--fs-h1);text-align:left">248</p><h4>StatCard default</h4><p class="caption">Active orders this week</p></div><div class="card stat-card selected"><p class="num" style="font-size:var(--fs-h1);text-align:left">31%</p><h4>StatCard selected</h4><p class="caption">Inverted selected state</p></div></div>
+        <div class="example"><h3>StatusPill</h3><div class="row"><span class="status-pill tone-success"><span class="dot"></span>Active</span><span class="status-pill tone-success"><span class="dot"></span>Approved</span><span class="status-pill tone-success"><span class="dot"></span>Filled</span><span class="status-pill tone-warning"><span class="dot"></span>Pending</span><span class="status-pill tone-warning"><span class="dot"></span>Filling order</span><span class="status-pill tone-warning"><span class="dot"></span>Awaiting confirmation</span><span class="status-pill tone-error"><span class="dot"></span>Failed</span><span class="status-pill tone-error"><span class="dot"></span>Archived</span><span class="status-pill tone-info"><span class="dot"></span>Payroll sent</span><span class="status-pill tone-info"><span class="dot"></span>Reviewing</span><span class="status-pill tone-pending"><span class="dot"></span>Confirming</span><span class="status-pill tone-pending"><span class="dot"></span>Preparing pledges</span><span class="status-pill tone-neutral"><span class="dot"></span>Submitting</span><span class="status-pill tone-neutral"><span class="dot"></span>Processing</span><span class="status-pill tone-neutral"><span class="dot"></span>Draft</span></div></div>
+        <div class="grid-3"><div class="example"><h3>HorizontalStepper sm</h3><div class="stepper" role="progressbar" aria-valuenow="2" aria-valuemin="1" aria-valuemax="4"><span class="step step-sm done"><i class="ti ti-check"></i></span><span class="step-line filled"></span><span class="step step-sm current">2</span><span class="step-line"></span><span class="step step-sm todo">3</span></div></div><div class="example"><h3>HorizontalStepper md</h3><div class="stepper" role="progressbar" aria-valuenow="2" aria-valuemin="1" aria-valuemax="4"><span class="step step-md done"><i class="ti ti-check"></i></span><span class="step-line filled"></span><span class="step step-md current">2</span><span class="step-line"></span><span class="step step-md todo">3</span></div></div><div class="example"><h3>HorizontalStepper lg</h3><div class="stepper" role="progressbar" aria-valuenow="2" aria-valuemin="1" aria-valuemax="4"><span class="step step-lg done"><i class="ti ti-check"></i></span><span class="step-line filled"></span><span class="step step-lg current">2</span><span class="step-line"></span><span class="step step-lg todo">3</span></div></div></div>
+        <div class="example"><h3>Chip / FilterChip</h3><div class="row"><button class="chip">Open <span class="mono">42</span></button><button class="chip active">Pending <span class="mono">18</span></button></div></div>
+        <div class="grid-3"><div class="example"><h3>ProportionBar sm</h3><div class="bar sm"><span style="width:72%;background:var(--viz-cyan)"></span></div><p class="caption">72%</p></div><div class="example"><h3>ProportionBar md</h3><div class="bar md"><span style="width:48%;background:var(--viz-blue)"></span></div><p class="caption">48%</p></div><div class="example"><h3>ProportionBar lg</h3><div class="bar lg"><span style="width:86%;background:var(--viz-navy)"></span></div><p class="caption">86%</p></div></div>
+        <div class="grid-2"><div class="example"><h3>AudienceSelector flat</h3><div class="stack"><label class="audience-option"><input type="checkbox" checked> Agencies</label><label class="audience-option"><input type="checkbox"> Companies</label></div></div><div class="example"><h3>AudienceSelector exclusive</h3><div class="stack"><label class="audience-option"><input type="checkbox" checked> Everyone</label><label class="audience-option"><input type="checkbox" disabled> Branch admins</label></div></div></div>
+        <div class="example"><h3>MultiSelectList</h3><div class="field" style="max-width:420px"><label>Search agencies</label><input class="input" value="staff"><label class="check-row"><input type="checkbox" checked> All visible agencies</label><label class="check-row"><input type="checkbox" checked> Coca-Cola Staffing</label><label class="check-row"><input type="checkbox"> Staffology West</label><p class="caption">2 of 8 selected</p></div></div>
+        <div class="stack"><div class="announcement"><strong>AnnouncementBar collapsed</strong><p class="caption">3 active announcements · Payroll cutoff moved to Friday.</p></div><div class="announcement"><strong>AnnouncementBar expanded</strong><p class="caption">Payroll cutoff moved to Friday · New branch onboarding · Holiday schedule posted.</p></div><div class="announcement"><strong>AnnouncementBar composing</strong><div class="field"><label>Title</label><input class="input" value="Holiday schedule"><label>Message</label><textarea class="input" style="height:90px;padding-top:var(--space-3)">Share the updated branch schedule.</textarea></div></div></div>
+        <div class="grid-2"><div class="example"><h3>ChartCard line</h3><svg class="chart" viewBox="0 0 520 220" role="img" aria-label="Static line chart with two blue series"><polyline points="20,170 100,130 180,142 260,82 340,96 420,60 500,72" fill="none" stroke="var(--viz-cyan)" stroke-width="4" stroke-linecap="round"/><polyline points="20,184 100,160 180,166 260,132 340,118 420,126 500,94" fill="none" stroke="var(--viz-blue)" stroke-width="4" stroke-linecap="round"/><line x1="20" y1="190" x2="500" y2="190" stroke="var(--neutral-200)"/></svg></div><div class="example"><h3>ChartCard bar</h3><svg class="chart" viewBox="0 0 520 220" role="img" aria-label="Static bar chart using blue visualization tokens"><rect x="40" y="92" width="52" height="98" rx="8" fill="var(--viz-cyan)"/><rect x="130" y="128" width="52" height="62" rx="8" fill="var(--viz-blue)"/><rect x="220" y="74" width="52" height="116" rx="8" fill="var(--viz-navy)"/><rect x="310" y="112" width="52" height="78" rx="8" fill="var(--viz-cyan-soft)"/><rect x="400" y="58" width="52" height="132" rx="8" fill="var(--viz-blue-soft)"/><line x1="20" y1="190" x2="500" y2="190" stroke="var(--neutral-200)"/></svg></div></div>
+      </div>
+    </section>
+
+    <section id="patterns" class="section" data-title="Patterns">
+      <h2>Patterns</h2>
+      <div class="rules">
+        <div class="rule"><strong>Empty by design</strong><p>Use when the absence is expected, such as no scheduled orders today.</p></div>
+        <div class="rule"><strong>Empty after filtering</strong><p>Use when data exists but filters remove all results. The next action should be filter recovery.</p></div>
+        <div class="rule"><strong>Empty KPI</strong><p>Use an em dash plus caption when a metric is missing or not yet measurable. Do not show zero unless zero is real.</p></div>
+        <div class="rule"><strong>Error states</strong><p>Separate page-level, component-level, and form-level errors so severity matches the surface.</p></div>
+        <div class="rule"><strong>No permission</strong><p>State the access boundary plainly and offer a next step when the product supports one.</p></div>
+      </div>
+      <div class="grid-3"><div class="example"><i class="ti ti-circle-check" style="font-size:24px;color:var(--primary-800)"></i><h3>Empty by design</h3><p class="caption">No orders are scheduled for this branch today.</p></div><div class="example"><i class="ti ti-filter-off" style="font-size:24px;color:var(--primary-800)"></i><h3>Empty after filtering</h3><p class="caption">No results match the current filters.</p></div><div class="example"><h3>Empty cell</h3><p class="empty-cell">—</p><p class="caption">Not yet reported</p></div></div>
+      <div class="grid-3" style="margin-top:var(--space-5)"><div class="example"><h3>Empty KPI</h3><p class="empty-cell" style="font-size:var(--fs-h1)">—</p><p class="caption">Waiting for first events</p></div><div class="example"><h3>Loading states</h3><div class="skeleton" style="height:80px"></div><button class="btn btn-primary btn-md" style="margin-top:var(--space-3)"><span class="spinner"></span>Loading</button></div><div class="example"><h3>Error states</h3><p class="status-pill tone-error"><span class="dot"></span>Page unavailable</p><p class="helper error">Check the required fields before saving.</p></div></div>
+      <div class="example" style="margin-top:var(--space-5)"><h3>No-permission states</h3><p class="caption">You do not have permission to view payroll exports. Ask an admin for access.</p><button class="btn btn-secondary btn-md">Request access</button></div>
+    </section>
+
+    <section id="tables-dense-vs-default" class="section" data-title="Tables — dense vs default">
+      <h2>Tables — dense vs default</h2>
+      <div class="rules">
+        <div class="rule"><strong>Default first</strong><p>Divider-only headers keep ordinary operational tables calm and scan-friendly.</p></div>
+        <div class="rule"><strong>Dense when scanning breaks</strong><p>Neutral header fill is allowed for dense comparison work: 6+ columns, similar stacked tables, or horizontal scrolling.</p></div>
+        <div class="rule"><strong>Numeric discipline</strong><p>Right-align numbers, use tabular mono values, and show em dash for empty values instead of blank or N/A.</p></div>
+      </div>
+      <div class="grid-2"><figure class="example table-wrap"><figcaption>Default to divider-only. It is calmer for orders, candidates, payroll, and standard listings.</figcaption><table class=""><thead><tr><th>Branch</th><th>Status</th><th class="num">Active orders</th><th class="num">Hours</th></tr></thead><tbody><tr><td>Carson</td><td><span class="status-pill tone-success"><span class="dot"></span>Active</span></td><td class="num">248</td><td class="num">12,840</td></tr><tr><td>Chino</td><td><span class="status-pill tone-info"><span class="dot"></span>Reviewing</span></td><td class="num">139</td><td class="num">8,420</td></tr><tr><td>Phoenix</td><td><span class="status-pill tone-warning"><span class="dot"></span>Pending</span></td><td class="num">42</td><td class="num">1,820</td></tr></tbody></table></figure><figure class="example table-wrap"><figcaption>Reach for dense only when comparison content becomes hard to scan.</figcaption><table class="dense"><thead><tr><th>Branch</th><th>Status</th><th class="num">Active orders</th><th class="num">Hours</th></tr></thead><tbody><tr><td>Carson</td><td><span class="status-pill tone-success"><span class="dot"></span>Active</span></td><td class="num">248</td><td class="num">12,840</td></tr><tr><td>Chino</td><td><span class="status-pill tone-info"><span class="dot"></span>Reviewing</span></td><td class="num">139</td><td class="num">8,420</td></tr><tr><td>Phoenix</td><td><span class="status-pill tone-warning"><span class="dot"></span>Pending</span></td><td class="num">42</td><td class="num">1,820</td></tr></tbody></table></figure></div>
+    </section>
+
+    <section id="footer" class="section" data-title="Footer">
+      <h2>Footer</h2>
+      <div class="rules">
+        <div class="rule"><strong>Traceability</strong><p>Keep version, update date, source docs, and token source visible so designers know what they are validating against.</p></div>
+        <div class="rule"><strong>Static handoff</strong><p>This file is ready for static deployment. Any future additions should stay self-contained unless the source docs change.</p></div>
+      </div>
+      <p>Version: <span class="mono">v2.1</span></p>
+      <p>Last updated: May 29, 2026</p>
+      <p>Source files: <a href="https://www.notion.so/Staffology-Design-System-Living-Docs-36fafaceeb29811f99c4ffa848168fd8?source=copy_link">Staffology Design System Living Docs</a></p>
+      <p>Built from: <span class="mono">colors_and_type.css</span></p>
+    </section>
+  </main>
+</div>
+<div class="copy-toast" role="status" aria-live="polite">Copied!</div>
+<script>
+const links = [...document.querySelectorAll('.nav-list a')];
+const sections = [...document.querySelectorAll('main section')];
+const search = document.querySelector('.nav-search');
+const toast = document.querySelector('.copy-toast');
+
+function setActiveLink(id) {
+  links.forEach((link) => {
+    const active = link.getAttribute('href') === '#' + id;
+    link.classList.toggle('active', active);
+    if (active) {
+      link.setAttribute('aria-current', 'true');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
+function updateActiveSection() {
+  const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  if (pageBottom) {
+    setActiveLink('footer');
+    return;
+  }
+
+  const probe = window.scrollY + Math.min(window.innerHeight * 0.38, 320);
+  let current = sections[0]?.id;
+  sections.forEach((section) => {
+    if (section.offsetTop <= probe) current = section.id;
+  });
+  if (current) setActiveLink(current);
+}
+
+search?.addEventListener('input', () => {
+  const q = search.value.trim().toLowerCase();
+  links.forEach((link) => {
+    const id = link.getAttribute('href').slice(1);
+    const section = document.getElementById(id);
+    const text = `${link.textContent} ${section?.dataset.title || ''} ${section?.textContent || ''}`.toLowerCase();
+    link.parentElement.hidden = q.length > 0 && !text.includes(q);
+  });
+});
+document.querySelector('.mobile-nav')?.addEventListener('change', (event) => {
+  document.querySelector(event.target.value)?.scrollIntoView();
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    setActiveLink(entry.target.id);
+  });
+}, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
+sections.forEach((section) => observer.observe(section));
+links.forEach((link) => {
+  link.addEventListener('click', () => {
+    setActiveLink(link.getAttribute('href').slice(1));
+  });
+});
+window.addEventListener('scroll', updateActiveSection, { passive: true });
+window.addEventListener('resize', updateActiveSection);
+updateActiveSection();
+document.querySelectorAll('[data-tabs]').forEach((group) => {
+  group.addEventListener('click', (event) => {
+    const tab = event.target.closest('.tab');
+    if (!tab) return;
+    group.querySelectorAll('.tab').forEach((item) => item.classList.toggle('active', item === tab));
+  });
+});
+document.querySelectorAll('.swatch').forEach((swatch) => {
+  swatch.addEventListener('click', async () => {
+    const value = swatch.dataset.copy;
+    try { await navigator.clipboard.writeText(value); } catch (error) {}
+    toast.classList.add('show');
+    window.setTimeout(() => toast.classList.remove('show'), 1200);
+  });
+});
+</script>
+</body>
+</html>
