@@ -451,6 +451,10 @@ p { margin-top: 0; }
 .rule { border: 1px solid var(--neutral-200); background: var(--neutral-50); border-radius: var(--radius-md); padding: var(--space-4); }
 .rule strong { display: block; color: var(--primary-800); font-size: var(--fs-caption); margin-bottom: var(--space-1); }
 .rule p { margin: 0; color: var(--neutral-700); font-size: var(--fs-caption); }
+.recipe-card { background: var(--white); border: 1px solid var(--neutral-200); border-radius: var(--radius-md); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); }
+.recipe-card ul { margin: 0; padding-left: var(--space-5); color: var(--neutral-700); font-size: var(--fs-caption); }
+.decision-table td:first-child { color: var(--primary-800); font-weight: var(--fw-semibold); }
+.callout { border-left: 4px solid var(--primary-800); background: var(--neutral-50); padding: var(--space-4); border-radius: var(--radius-sm); color: var(--neutral-700); }
 .token-group { border-top: 1px solid var(--neutral-200); padding-top: var(--space-5); margin-top: var(--space-5); }
 .group-head { display: flex; justify-content: space-between; gap: var(--space-4); align-items: baseline; margin-bottom: var(--space-3); }
 .group-head p { color: var(--neutral-700); font-size: var(--fs-caption); max-width: 520px; margin: 0; }
@@ -588,7 +592,7 @@ input[type="checkbox"] { accent-color: var(--primary-800); width: 18px; height: 
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="mobile-bar">
   <select class="mobile-nav" aria-label="Jump to section">
-    <option value="#cover">Cover</option><option value="#foundations-color-tokens">Color tokens</option><option value="#foundations-typography">Typography</option><option value="#foundations-spacing-scale">Spacing scale</option><option value="#foundations-radius">Radius</option><option value="#foundations-shadows">Shadows</option><option value="#foundations-motion">Motion</option><option value="#components-primitives">Components — primitives</option><option value="#components-base">Components — base</option><option value="#components-patterns">Components — patterns</option><option value="#patterns">Patterns</option><option value="#tables-dense-vs-default">Tables — dense vs default</option><option value="#footer">Footer</option>
+    <option value="#cover">Cover</option><option value="#philosophy">Philosophy</option><option value="#foundations-color-tokens">Color tokens</option><option value="#foundations-typography">Typography</option><option value="#foundations-spacing-scale">Spacing scale</option><option value="#foundations-radius">Radius</option><option value="#foundations-shadows">Shadows</option><option value="#foundations-motion">Motion</option><option value="#components-primitives">Components — primitives</option><option value="#components-base">Components — base</option><option value="#components-patterns">Components — patterns</option><option value="#patterns">Patterns</option><option value="#applied-recipes">Applied recipes</option><option value="#application-guidelines">Application guidelines</option><option value="#adaptation-guide">Adaptation guide</option><option value="#governance">Governance</option><option value="#tables-dense-vs-default">Tables — dense vs default</option><option value="#footer">Footer</option>
   </select>
 </div>
 <div class="layout">
@@ -597,7 +601,7 @@ input[type="checkbox"] { accent-color: var(--primary-800); width: 18px; height: 
     <input class="nav-search" type="search" placeholder="Search sections" aria-label="Search sections">
     <nav>
       <ul class="nav-list">
-        <li><a href="#cover">Cover</a></li><li><a href="#foundations-color-tokens">Color tokens</a></li><li><a href="#foundations-typography">Typography</a></li><li><a href="#foundations-spacing-scale">Spacing scale</a></li><li><a href="#foundations-radius">Radius</a></li><li><a href="#foundations-shadows">Shadows</a></li><li><a href="#foundations-motion">Motion</a></li><li><a href="#components-primitives">Components — primitives</a></li><li><a href="#components-base">Components — base</a></li><li><a href="#components-patterns">Components — patterns</a></li><li><a href="#patterns">Patterns</a></li><li><a href="#tables-dense-vs-default">Tables — dense vs default</a></li><li><a href="#footer">Footer</a></li>
+        <li><a href="#cover">Cover</a></li><li><a href="#philosophy">Philosophy</a></li><li><a href="#foundations-color-tokens">Color tokens</a></li><li><a href="#foundations-typography">Typography</a></li><li><a href="#foundations-spacing-scale">Spacing scale</a></li><li><a href="#foundations-radius">Radius</a></li><li><a href="#foundations-shadows">Shadows</a></li><li><a href="#foundations-motion">Motion</a></li><li><a href="#components-primitives">Components — primitives</a></li><li><a href="#components-base">Components — base</a></li><li><a href="#components-patterns">Components — patterns</a></li><li><a href="#patterns">Patterns</a></li><li><a href="#applied-recipes">Applied recipes</a></li><li><a href="#application-guidelines">Application guidelines</a></li><li><a href="#adaptation-guide">Adaptation guide</a></li><li><a href="#governance">Governance</a></li><li><a href="#tables-dense-vs-default">Tables — dense vs default</a></li><li><a href="#footer">Footer</a></li>
       </ul>
     </nav>
   </aside>
@@ -611,6 +615,21 @@ input[type="checkbox"] { accent-color: var(--primary-800); width: 18px; height: 
         <div class="rule"><strong>Decision lens</strong><p>Use this reference to validate hierarchy, density, status meaning, table treatment, and component fit before designing new screens.</p></div>
       </div>
       <p class="caption">Last updated: May 29, 2026</p>
+    </section>
+
+    <section id="philosophy" class="section" data-title="Philosophy">
+      <h2>Philosophy</h2>
+      <p class="caption">These principles override local taste decisions. They are the operating model for designing with this system instead of redrawing screens in a separate design tool.</p>
+      <div class="rules">
+        <div class="rule"><strong>One focal point per viewport</strong><p>Brand cyan is reserved for the single moment of attention. Repeated active controls use structural navy.</p></div>
+        <div class="rule"><strong>Tokens, not values</strong><p>Components reference tokens, not hardcoded hex, pixels, fonts, shadows, or z-index values.</p></div>
+        <div class="rule"><strong>Density follows content</strong><p>Comfortable density supports browsing. Data density supports comparison. Do not compress with random padding overrides.</p></div>
+        <div class="rule"><strong>Every state, always</strong><p>Default, hover, focus, selected, disabled, loading, empty, error, read-only, and no-permission states are part of the component.</p></div>
+        <div class="rule"><strong>Accessibility is a constraint</strong><p>WCAG 2.2 AA, visible focus, 44px touch targets, keyboard access, and color-plus-text signaling are non-negotiable.</p></div>
+      </div>
+      <div class="callout">
+        The design system should not behave like a sticker sheet. It should behave like a product decision engine: it makes the correct choice easier than a one-off choice.
+      </div>
     </section>
 
     <section id="foundations-color-tokens" class="section" data-title="Color tokens">
@@ -1224,6 +1243,162 @@ input[type="checkbox"] { accent-color: var(--primary-800); width: 18px; height: 
       <div class="grid-3"><div class="example"><i class="ti ti-circle-check" style="font-size:24px;color:var(--primary-800)"></i><h3>Empty by design</h3><p class="caption">No orders are scheduled for this branch today.</p></div><div class="example"><i class="ti ti-filter-off" style="font-size:24px;color:var(--primary-800)"></i><h3>Empty after filtering</h3><p class="caption">No results match the current filters.</p></div><div class="example"><h3>Empty cell</h3><p class="empty-cell">—</p><p class="caption">Not yet reported</p></div></div>
       <div class="grid-3" style="margin-top:var(--space-5)"><div class="example"><h3>Empty KPI</h3><p class="empty-cell" style="font-size:var(--fs-h1)">—</p><p class="caption">Waiting for first events</p></div><div class="example"><h3>Loading states</h3><div class="skeleton" style="height:80px"></div><button class="btn btn-primary btn-md" style="margin-top:var(--space-3)"><span class="spinner"></span>Loading</button></div><div class="example"><h3>Error states</h3><p class="status-pill tone-error"><span class="dot"></span>Page unavailable</p><p class="helper error">Check the required fields before saving.</p></div></div>
       <div class="example" style="margin-top:var(--space-5)"><h3>No-permission states</h3><p class="caption">You do not have permission to view payroll exports. Ask an admin for access.</p><button class="btn btn-secondary btn-md">Request access</button></div>
+    </section>
+
+    <section id="applied-recipes" class="section" data-title="Applied recipes">
+      <h2>Applied recipes</h2>
+      <p class="caption">Recipes are the practical replacement for static screen mockups. They compose approved components into repeatable product decisions.</p>
+      <div class="grid-3">
+        <div class="recipe-card">
+          <h3>Listing page</h3>
+          <p class="caption">Use for orders, candidates, payroll batches, and operational lists.</p>
+          <ul>
+            <li>Page header with one primary action</li>
+            <li>FilterChip row with navy active state</li>
+            <li>Default Table unless scanning breaks</li>
+            <li>Pagination bottom-right</li>
+            <li>Empty after filtering with clear filters action</li>
+          </ul>
+        </div>
+        <div class="recipe-card">
+          <h3>Dense comparison</h3>
+          <p class="caption">Use for cross-entity comparison and many-column analysis.</p>
+          <ul>
+            <li>Dense Table with neutral-100 header</li>
+            <li>Data density rows</li>
+            <li>Right-aligned mono numerics</li>
+            <li>Delta values use status semantics</li>
+            <li>Optional sparklines only for trends</li>
+          </ul>
+        </div>
+        <div class="recipe-card">
+          <h3>Form flow</h3>
+          <p class="caption">Use for profile edits, settings, and admin configuration.</p>
+          <ul>
+            <li>Visible labels above inputs</li>
+            <li>Helper text replaced by error text</li>
+            <li>Submit bottom-right, cancel to its left</li>
+            <li>Danger actions physically separated</li>
+            <li>Save button shows loading state</li>
+          </ul>
+        </div>
+        <div class="recipe-card">
+          <h3>Destructive action</h3>
+          <p class="caption">Use for delete, archive, remove, and revoke flows.</p>
+          <ul>
+            <li>Danger Button for the trigger</li>
+            <li>Confirmation Modal required</li>
+            <li>Cancel outlined, destructive action filled</li>
+            <li>Do not auto-focus the destructive button</li>
+            <li>Prefer archive over hard delete</li>
+          </ul>
+        </div>
+        <div class="recipe-card">
+          <h3>Announcement workflow</h3>
+          <p class="caption">Use for admin messages and role-aware communication.</p>
+          <ul>
+            <li>AnnouncementBar collapsed and expanded states</li>
+            <li>Composing state uses form rules</li>
+            <li>AudienceSelector for audience scope</li>
+            <li>MultiSelectList for long target lists</li>
+            <li>Toast confirms publish success</li>
+          </ul>
+        </div>
+        <div class="recipe-card">
+          <h3>KPI dashboard</h3>
+          <p class="caption">Use for operational overview and executive scanning.</p>
+          <ul>
+            <li>StatCard for single-number emphasis</li>
+            <li>DonutCard for fraction-first reads</li>
+            <li>ChartCard for time or category comparison</li>
+            <li>Empty KPI uses em dash plus caption</li>
+            <li>Charts use blue-only viz tokens</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="application-guidelines" class="section" data-title="Application guidelines">
+      <h2>Application guidelines</h2>
+      <p class="caption">Use these decision rules when designing new product surfaces directly in HTML or code.</p>
+      <div class="table-wrap">
+        <table class="decision-table">
+          <thead><tr><th>Situation</th><th>Use</th><th>Do not use</th></tr></thead>
+          <tbody>
+            <tr><td>Small finite choice</td><td>Select</td><td>Combobox for under 10 obvious options</td></tr>
+            <tr><td>Long searchable choice</td><td>Combobox</td><td>Native Select with dozens of items</td></tr>
+            <tr><td>Many checkbox targets</td><td>MultiSelectList</td><td>A long loose list without search or summary</td></tr>
+            <tr><td>Audience targeting</td><td>AudienceSelector</td><td>Custom card toggles with different rules</td></tr>
+            <tr><td>Business status</td><td>StatusPill</td><td>Badge or inline colored text</td></tr>
+            <tr><td>Non-blocking feedback</td><td>Toast</td><td>Modal</td></tr>
+            <tr><td>Must-see confirmation</td><td>Modal</td><td>Toast</td></tr>
+            <tr><td>Ordinary listing table</td><td>Default Table</td><td>Dense header fill by default</td></tr>
+            <tr><td>Many-column comparison</td><td>Dense Table</td><td>Divider-only header when scanning fails</td></tr>
+            <tr><td>Missing metric</td><td>Em dash plus caption</td><td>Zero, blank, or N/A</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rules" style="margin-top: var(--space-5)">
+        <div class="rule"><strong>Forms</strong><p>Labels are visible, validation runs on blur and submit, and form-level summaries appear only when several errors occur at once.</p></div>
+        <div class="rule"><strong>Navigation</strong><p>Top nav has one active brand pill. Side nav groups sections and supports collapsible groups when the count exceeds eight.</p></div>
+        <div class="rule"><strong>Destructive actions</strong><p>Destructive actions are separated, confirmed, and never auto-focused. Undo is only for reversible actions.</p></div>
+        <div class="rule"><strong>Accessibility checks</strong><p>Keyboard, focus, labels, aria attributes, touch targets, contrast, reduced motion, and color-plus-text signals are part of every review.</p></div>
+      </div>
+    </section>
+
+    <section id="adaptation-guide" class="section" data-title="Adaptation guide">
+      <h2>Adaptation guide</h2>
+      <p class="caption">This system is meant to travel across sibling products without forking components.</p>
+      <div class="grid-2">
+        <div class="recipe-card">
+          <h3>What can change per product</h3>
+          <ul>
+            <li>Brand scale: <span class="mono">--brand</span>, hover, active, 100, 50</li>
+            <li>Typography only when a product brand requires it</li>
+            <li>Structural primary scale only as a full coherent scale</li>
+            <li>Data viz link to brand, when charts should remain blue</li>
+            <li>Product-specific status code labels mapped to DS tones</li>
+          </ul>
+        </div>
+        <div class="recipe-card">
+          <h3>What should not change</h3>
+          <ul>
+            <li>Status semantic meanings</li>
+            <li>Single-instance vs mass-instance rule</li>
+            <li>Component APIs without an approved variant</li>
+            <li>Token categories without DS alignment</li>
+            <li>Accessibility requirements</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rules" style="margin-top: var(--space-5)">
+        <div class="rule"><strong>Adapt through tokens</strong><p>Override raw tokens in a product theme file loaded after the DS. Do not edit the DS token file directly.</p></div>
+        <div class="rule"><strong>Validate before building pages</strong><p>Render this reference with the new theme and check buttons, focus rings, brand tints, selected rows, and contrast.</p></div>
+        <div class="rule"><strong>Map business statuses</strong><p>Each product creates a status map. The DS provides six tones; the product names its own statuses.</p></div>
+        <div class="rule"><strong>Promote repeated patterns</strong><p>If a local pattern appears in three or more places, propose it as a DS candidate instead of letting it fragment.</p></div>
+      </div>
+    </section>
+
+    <section id="governance" class="section" data-title="Governance">
+      <h2>Governance</h2>
+      <p class="caption">Governance keeps AI-assisted design, code implementation, and product decisions from drifting into separate truths.</p>
+      <div class="rules">
+        <div class="rule"><strong>Code owns implementation</strong><p>The developer DS owns production component behavior, APIs, and token delivery.</p></div>
+        <div class="rule"><strong>Living docs own decisions</strong><p>This HTML explains when and why to use components, states, density, status, and visual hierarchy.</p></div>
+        <div class="rule"><strong>Recipes replace static mockups</strong><p>Design exploration happens by composing real DS pieces into product recipes, then comparing against code.</p></div>
+        <div class="rule"><strong>Version every change</strong><p>Rules, tokens, variants, and promoted patterns should land with a version note and source update.</p></div>
+      </div>
+      <div class="table-wrap">
+        <table class="decision-table">
+          <thead><tr><th>Change type</th><th>First step</th><th>Promotion rule</th></tr></thead>
+          <tbody>
+            <tr><td>Token mismatch</td><td>Compare docs against code token source</td><td>Code source wins unless product decision changes</td></tr>
+            <tr><td>Component variant</td><td>Prototype in HTML with existing tokens</td><td>Promote when the use case repeats</td></tr>
+            <tr><td>New pattern</td><td>Build as an applied recipe first</td><td>Promote after 3+ product appearances</td></tr>
+            <tr><td>Product adaptation</td><td>Create product theme overrides</td><td>Never fork base components first</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section id="tables-dense-vs-default" class="section" data-title="Tables — dense vs default">
