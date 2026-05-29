@@ -411,7 +411,7 @@ body {
 
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 body { margin: 0; background: var(--neutral-100); color: var(--neutral-900); }
 a { color: inherit; }
 button, input, select, textarea { font: inherit; }
@@ -480,7 +480,11 @@ p { margin-top: 0; }
 .btn-danger { background: var(--error-500); color: var(--white); }
 .btn-danger:hover { background: var(--error-800); }
 .btn-link { padding-inline: 0; min-width: auto; color: var(--brand-active); }
-.btn-icon { width: var(--btn-height-md); padding: 0; background: var(--white); color: var(--primary-800); border-color: var(--neutral-300); }
+.btn-icon { aspect-ratio: 1; padding: 0; background: var(--white); color: var(--primary-800); border-color: var(--neutral-300); }
+.btn-icon.btn-sm { width: var(--btn-height-sm); }
+.btn-icon.btn-md { width: var(--btn-height-md); }
+.btn-icon.btn-lg { width: var(--btn-height-lg); }
+.btn-icon i { display: block; line-height: 1; font-size: 18px; }
 .btn[disabled], .input[disabled], select[disabled] { cursor: not-allowed; opacity: .58; }
 .spinner { width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 800ms linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -1170,7 +1174,7 @@ input[type="checkbox"] { accent-color: var(--primary-800); width: 18px; height: 
       </div>
       <div class="stack">
         <div class="grid-2"><figure class="example table-wrap"><figcaption>Default table: divider-only header for standard listings.</figcaption><table class=""><thead><tr><th>Branch</th><th>Status</th><th class="num">Active orders</th><th class="num">Hours</th></tr></thead><tbody><tr><td>Carson</td><td><span class="status-pill tone-success"><span class="dot"></span>Active</span></td><td class="num">248</td><td class="num">12,840</td></tr><tr><td>Chino</td><td><span class="status-pill tone-info"><span class="dot"></span>Reviewing</span></td><td class="num">139</td><td class="num">8,420</td></tr><tr><td>Phoenix</td><td><span class="status-pill tone-warning"><span class="dot"></span>Pending</span></td><td class="num">42</td><td class="num">1,820</td></tr></tbody></table></figure><figure class="example table-wrap"><figcaption>Dense table: neutral header for comparison tables with 6+ columns.</figcaption><table class="dense"><thead><tr><th>Branch</th><th>Status</th><th class="num">Active orders</th><th class="num">Hours</th></tr></thead><tbody><tr><td>Carson</td><td><span class="status-pill tone-success"><span class="dot"></span>Active</span></td><td class="num">248</td><td class="num">12,840</td></tr><tr><td>Chino</td><td><span class="status-pill tone-info"><span class="dot"></span>Reviewing</span></td><td class="num">139</td><td class="num">8,420</td></tr><tr><td>Phoenix</td><td><span class="status-pill tone-warning"><span class="dot"></span>Pending</span></td><td class="num">42</td><td class="num">1,820</td></tr></tbody></table></figure></div>
-        <div class="example"><h3>Modal</h3><div class="modal-stage"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="row" style="justify-content:space-between"><h4 id="modal-title">Archive order</h4><button class="btn btn-icon" aria-label="Close"><i class="ti ti-x"></i></button></div><p class="caption">This static render shows the dialog and backdrop treatment.</p><div class="row" style="justify-content:flex-end"><button class="btn btn-secondary btn-md">Cancel</button><button class="btn btn-danger btn-md">Archive</button></div></div></div></div>
+        <div class="example"><h3>Modal</h3><div class="modal-stage"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="row" style="justify-content:space-between"><h4 id="modal-title">Archive order</h4><button class="btn btn-icon btn-md" aria-label="Close"><i class="ti ti-x"></i></button></div><p class="caption">This static render shows the dialog and backdrop treatment.</p><div class="row" style="justify-content:flex-end"><button class="btn btn-secondary btn-md">Cancel</button><button class="btn btn-danger btn-md">Archive</button></div></div></div></div>
         <div class="grid-2"><div class="example"><h3>Tabs pill</h3><div class="tabs" data-tabs><button class="tab active">Overview</button><button class="tab">Orders</button><button class="tab">Invoices</button></div></div><div class="example"><h3>Tabs underline</h3><div class="tabs underline" data-tabs><button class="tab active">Profile</button><button class="tab">Skills</button><button class="tab">Interview</button></div></div></div>
         <div class="grid-3"><div class="field"><label>Select default</label><select class="select"><option>Active orders</option></select></div><div class="field"><label>Select focused</label><select class="select focused"><option>Pending orders</option></select></div><div class="field"><label>Select disabled</label><select class="select" disabled><option>Archived</option></select></div></div>
         <div class="grid-2"><div class="example"><h3>Combobox closed</h3><input class="input" value="Coca-Cola Staffing" aria-label="Combobox closed"></div><div class="example"><h3>Combobox open</h3><input class="input focused" value="co" aria-label="Combobox open"><div class="combo-menu"><div class="combo-item active">Coca-Cola Staffing</div><div class="combo-item">Coastal Logistics</div><div class="combo-item">Core Payroll Group</div></div></div></div>
@@ -1291,13 +1295,6 @@ search?.addEventListener('input', () => {
 document.querySelector('.mobile-nav')?.addEventListener('change', (event) => {
   document.querySelector(event.target.value)?.scrollIntoView();
 });
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    setActiveLink(entry.target.id);
-  });
-}, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
-sections.forEach((section) => observer.observe(section));
 links.forEach((link) => {
   link.addEventListener('click', () => {
     setActiveLink(link.getAttribute('href').slice(1));
